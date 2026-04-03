@@ -1,0 +1,471 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/order.css' %}">
+
+<div class="order-page-wrapper">
+  <div class="order-container">
+    <h2 class="order-title">My Orders</h2>
+    <div class="order-summary">
+
+  <div class="summary-box" data-status="all" >
+    <p>Total Orders</p>
+    <span id="totalOrders">0</span>
+  </div>
+
+  <div class="summary-box" data-status="Delivered">
+    <p>Delivered</p>
+    <span id="deliveredOrders">0</span>
+  </div>
+
+  <div class="summary-box" data-status="Processing">
+    <p>Processing</p>
+    <span id="processingOrders">0</span>
+  </div>
+
+  <div class="summary-box" data-status="Out for Delivery">
+    <p>Out for Delivery</p>
+    <span id="outDeliveryOrders">0</span>
+  </div>
+
+</div>
+    <div id="ordersWrapper"></div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+<script>
+
+let loggedUserID = null;
+let allOrders = [];
+
+/* PAGE LOAD */
+$(document).ready(function () {
+    getUserFromToken();
+});
+
+
+/* VERIFY USER TOKEN */
+
+function getUserFromToken(){
+
+$.ajax({
+
+url:"/verify_user_token",
+type:"GET",
+
+headers:{
+token: localStorage.getItem("token")
+},
+
+success:function(res){
+
+console.log("Verify API Response:", res);
+
+if(res.valid === true){
+
+loggedUserID = res.user_id;
+console.log("User ID:", loggedUserID);
+
+loadOrders();
+
+}else{
+
+alert("User verification failed");
+
+}
+
+}
+
+});
+
+}
+
+
+/* LOAD ORDERS */
+
+function loadOrders(){
+
+$.ajax({
+
+url:"{% url 'getOrderHistory' %}",
+type:"GET",
+
+headers:{
+token: localStorage.getItem("token")
+},
+
+success:function(res){
+
+const wrapper = $("#ordersWrapper");
+wrapper.empty();
+
+let total=0;
+let delivered=0;
+let processing=0;
+let outDelivery=0;
+
+if(!res.data || res.data.length===0){
+wrapper.html("<p class='no-orders'>No orders found</p>");
+return;
+}
+
+allOrders = res.data;
+
+renderOrders(allOrders);
+
+res.data.forEach(order=>{
+
+total++;
+
+if(order.status==="Delivered") delivered++;
+
+if(order.status==="Processing" || order.status==="Accepted"){
+processing++;
+}
+
+if(order.status==="Out for Delivery") outDelivery++;
+
+});
+
+$("#totalOrders").text(total);
+$("#deliveredOrders").text(delivered);
+$("#processingOrders").text(processing);
+$("#outDeliveryOrders").text(outDelivery);
+
+}
+
+});
+
+}
+
+
+
+/* RENDER ORDER CARD */
+
+function renderOrderCard(order){
+
+let productID = order.items[0].productID;
+
+let imagesHTML=`<div class="order-left">`;
+
+let totalItems = order.items.length;
+
+order.items.slice(0,4).forEach((item,index)=>{
+
+if(index===0){
+
+imagesHTML+=`
+<div class="img-first">
+
+<img src="${item.image}" class="order-img">
+
+
+</div>
+`;
+
+}
+
+else if(index===3 && totalItems>4){
+
+let extra=totalItems-4;
+
+imagesHTML+=`
+<div class="img-wrapper">
+
+<img src="${item.image}" class="order-img">
+
+<div class="img-overlay">
++${extra}
+</div>
+
+</div>
+`;
+
+}
+
+else{
+
+imagesHTML+=`<img src="${item.image}" class="order-img">`;
+
+}
+
+});
+
+imagesHTML+=`</div>`;
+
+
+/* DELIVERY DATE */
+
+let orderDate = new Date(order.deliveryDate);
+orderDate.setDate(orderDate.getDate()+5);
+
+let deliveryDate = orderDate.toLocaleDateString("en-GB",{
+day:"2-digit",
+month:"short",
+year:"numeric"
+});
+
+
+/* REVIEW BOX */
+
+let ratingHTML="";
+
+
+const html=`
+
+<div class="order-card">
+
+<div class="order-grid">
+
+<div class="order-left-section">
+${imagesHTML}
+</div>
+
+<div class="order-middle">
+
+<div class="order-status">
+${order.status}
+</div>
+
+<div class="order-date">
+Delivery by ${deliveryDate}
+</div>
+
+<div class="order-total">
+₹${order.grandTotal}
+</div>
+
+</div>
+
+<div class="order-right">
+
+<span class="view-link-text"
+onclick="goToOrderDetail('${order.serialNo}')">
+View Details
+</span>
+
+</div>
+
+</div>
+
+</div>
+`;
+
+$("#ordersWrapper").append(html);
+
+
+/* LOAD REVIEW IF EXISTS */
+
+if(order.status==="Delivered"){
+loadReview(order.orderID, productID);
+}
+
+}
+function renderOrders(orders){
+
+const wrapper = $("#ordersWrapper");
+wrapper.empty();
+
+orders.forEach(order=>{
+renderOrderCard(order);
+});
+
+}
+
+
+
+/* LOAD EXISTING REVIEW */
+
+function loadReview(orderID, productID){
+
+$.ajax({
+
+url:"/GetReview",
+type:"GET",
+
+headers:{
+token: localStorage.getItem("token")
+},
+
+data:{
+orderID:orderID,
+productID:productID
+},
+
+success:function(res){
+
+let rating = res.rating;
+
+let stars = $(`.stars[data-order="${orderID}"] .star`);
+
+stars.each(function(){
+
+if($(this).data("rate") <= rating){
+
+$(this).text("★").css("color","#f5a623");
+
+}
+
+});
+
+}
+
+});
+
+}
+
+
+
+
+/* STAR CLICK */
+
+$(document).on("click",".star",function(){
+
+let rating=$(this).data("rate");
+
+let parent=$(this).parent();
+
+parent.attr("data-selected-rating",rating);
+
+let stars=parent.find(".star");
+
+stars.removeClass("filled");
+
+stars.each(function(){
+
+if($(this).data("rate") <= rating){
+
+$(this).addClass("filled").text("★");
+
+}else{
+
+$(this).removeClass("filled").text("☆");
+
+}
+
+});
+
+$(this).closest(".order-rating").find(".review-box").show();
+
+});
+
+
+
+/* SUBMIT REVIEW */
+
+$(document).on("click",".submit-review",function(){
+
+let box=$(this).closest(".order-rating");
+
+let productID=box.find(".stars").data("product");
+let orderID=box.find(".stars").data("order");
+
+let rating=box.find(".stars").attr("data-selected-rating");
+
+if(!rating){
+alert("Please select rating");
+return;
+}
+
+let comment=box.find(".review-comment").val();
+
+let image=box.find(".review-image")[0].files[0];
+
+$.ajax({
+
+url:"/CreateReview",
+type:"POST",
+
+headers:{
+"X-CSRFToken":getCSRFToken(),
+token: localStorage.getItem("token")
+},
+
+contentType:"application/json",
+
+data:JSON.stringify({
+
+productID:productID,
+orderID:orderID,
+Rating:rating,
+Comment:comment
+
+}),
+
+success:function(res){
+
+alert("Review Submitted!");
+
+if(image){
+
+let formData=new FormData();
+formData.append("Image",image);
+formData.append("ReviewID",res.review_id);
+
+$.ajax({
+
+url:"/CreateReviewImage",
+type:"POST",
+
+data:formData,
+processData:false,
+contentType:false
+
+});
+
+}
+
+}
+
+});
+
+});
+
+
+/* ORDER DETAIL */
+
+function goToOrderDetail(serialNo){
+
+window.location.href="/order-detail?serialNo="+serialNo;
+
+}
+
+
+/* CSRF TOKEN */
+
+function getCSRFToken(){
+
+return document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+}
+
+$(".summary-box").click(function(){
+
+let status = $(this).data("status");
+
+if(status === "all"){
+renderOrders(allOrders);
+return;
+}
+
+let filtered;
+
+if(status === "Processing"){
+    filtered = allOrders.filter(order => 
+        order.status === "Processing" || order.status === "Accepted"
+    );
+}else{
+    filtered = allOrders.filter(order => order.status === status);
+}
+
+renderOrders(filtered);
+
+});
+
+</script>
+
+
+{% endblock %}

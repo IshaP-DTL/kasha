@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Delivery Dashboard</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+
+body{
+overflow-x:hidden;
+background:#f8f9fa;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+height:100vh;
+background:#212529;
+color:white;
+position:fixed;
+width:220px;
+}
+
+.sidebar h4{
+padding:20px;
+border-bottom:1px solid #444;
+}
+
+.sidebar a{
+display:block;
+color:white;
+padding:12px 20px;
+text-decoration:none;
+}
+
+.sidebar a:hover{
+background:#343a40;
+}
+
+/* MAIN CONTENT */
+
+.main-content{
+margin-left:220px;
+padding:30px;
+}
+
+/* PROFILE ICON */
+
+.profileCircle{
+width:42px;
+height:42px;
+border-radius:50%;
+background:#0d6efd;
+color:white;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:18px;
+font-weight:600;
+cursor:pointer;
+}
+
+/* STATUS COLORS */
+
+.assigned{
+background:#ffc107;
+color:black;
+}
+
+.out{
+background:#0dcaf0;
+color:black;
+}
+
+.delivered{
+background:#198754;
+color:white;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+<h4>Delivery Panel</h4>
+
+<a href="#" class="navLink" data-type="all">My Orders</a>
+
+<a href="#" class="navLink" data-type="completed">Completed</a>
+
+<a href="#" id="logoutBtn">Logout</a>
+
+</div>
+
+
+<!-- MAIN CONTENT -->
+
+<div class="main-content">
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+<h5 id="welcomeName"></h5>
+
+<div class="profileCircle" id="profileInitial"></div>
+
+</div>
+
+<!-- ORDERS TABLE -->
+
+<div class="card shadow-sm">
+
+<div class="card-body">
+
+<h5 class="mb-3">Total Orders</h5>
+
+<table class="table table-bordered align-middle">
+
+<thead>
+<tr>
+<th>Order ID</th>
+<th>Date</th>
+<th>Customer</th>
+<th>Address</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody id="ordersTable"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- PROFILE MODAL -->
+
+<div class="modal fade" id="profileModal">
+
+<div class="modal-dialog modal-dialog-centered">
+
+<div class="modal-content">
+
+<div class="modal-header">
+
+<h5 class="modal-title">My Profile</h5>
+
+<button class="btn-close" data-bs-dismiss="modal"></button>
+
+</div>
+
+<div class="modal-body">
+
+<label>Name</label>
+<input type="text" id="profileName" class="form-control mb-3">
+
+<label>Email</label>
+<input type="email" id="profileEmail" class="form-control mb-3">
+
+<label>Mobile</label>
+<input type="text" id="profileMobile" class="form-control mb-3">
+
+</div>
+
+<div class="modal-footer">
+
+<button class="btn btn-primary" id="saveProfile">Save Changes</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+
+const token = localStorage.getItem("deliveryToken");
+
+let profileData = {};
+
+// LOAD ORDERS + PROFILE
+
+function loadOrders(filterType){
+
+$.ajax({
+
+url:"/deliveryDashboard",
+
+type:"GET",
+
+headers:{ "token": token },
+
+data:{ filter:filterType },
+
+success:function(response){
+
+profileData = response;
+
+$("#welcomeName").text("Welcome, " + response.deliveryPersonName);
+
+let firstLetter = response.deliveryPersonName.charAt(0).toUpperCase();
+
+$("#profileInitial").text(firstLetter);
+
+// fill profile fields
+
+$("#profileName").val(response.deliveryPersonName);
+$("#profileEmail").val(response.email);
+$("#profileMobile").val(response.mobile);
+
+let rows="";
+
+response.orders.forEach(function(order){
+
+let statusBadge="";
+let actionButton="";
+
+if(order.status==1 || order.status==2){
+
+statusBadge=`<span class="badge bg-warning text-dark">Assigned</span>`;
+
+actionButton=`<button class="btn btn-sm btn-primary updateBtn" data-id="${order.orderId}">Update</button>`;
+
+}
+
+else if(order.status==3){
+
+statusBadge=`<span class="badge bg-info text-dark">Out for Delivery</span>`;
+
+actionButton=`<button class="btn btn-sm btn-primary updateBtn" data-id="${order.orderId}">Update</button>`;
+
+}
+
+else if(order.status==4){
+
+statusBadge=`<span class="badge bg-success">Delivered</span>`;
+
+actionButton=`<button class="btn btn-sm btn-secondary viewBtn" data-id="${order.orderId}">View</button>`;
+
+}
+
+rows += `
+<tr>
+<td>#${order.orderId}</td>
+<td>${order.date}</td>
+<td>${order.customerName}</td>
+<td>${order.address}</td>
+<td>${statusBadge}</td>
+<td>${actionButton}</td>
+</tr>
+`;
+
+});
+
+$("#ordersTable").html(rows);
+
+}
+
+});
+
+}
+
+
+// PAGE LOAD
+
+$(document).ready(function(){
+
+if(!token){
+
+window.location.href="/delivery_login";
+return;
+
+}
+
+loadOrders("all");
+
+});
+
+
+// SIDEBAR FILTER
+
+$(document).on("click",".navLink",function(e){
+
+e.preventDefault();
+
+let type=$(this).data("type");
+
+loadOrders(type);
+
+});
+
+
+// OPEN PROFILE MODAL
+
+$("#profileInitial").click(function(){
+
+new bootstrap.Modal(document.getElementById("profileModal")).show();
+
+});
+
+
+$("#saveProfile").click(function(){
+
+    $.ajax({
+
+        url: "/updateDeliveryProfile",
+        type: "POST",
+
+        headers:{
+            "token": token,
+            "X-CSRFToken": "{{ csrf_token }}"
+        },
+
+        data:{
+            name: $("#profileName").val(),
+            email: $("#profileEmail").val(),
+            mobile: $("#profileMobile").val()
+        },
+
+        success:function(res){
+
+            // close profile modal first
+            const modalEl = document.getElementById("profileModal");
+            const modal = bootstrap.Modal.getInstance(modalEl);
+            if(modal){
+                modal.hide();
+            }
+
+            // show success popup
+            Swal.fire({
+                icon:"success",
+                title: res.message
+            });
+
+            loadOrders("all");
+
+        },
+
+        error:function(){
+            Swal.fire({
+                icon:"error",
+                title:"Update failed"
+            });
+        }
+
+    });
+
+});
+
+// LOGOUT
+
+$("#logoutBtn").click(function(e){
+
+e.preventDefault();
+
+localStorage.removeItem("deliveryToken");
+
+window.location.href="/delivery_login";
+
+});
+// UPDATE ORDER STATUS
+$(document).on("click",".updateBtn",function(){
+
+    const orderId = $(this).data("id");
+    const row = $(this).closest("tr");
+    const statusText = row.find("td:nth-child(5)").text().trim();
+
+    let confirmMessage = "";
+    let url = "";
+
+    if(statusText === "Assigned"){
+        confirmMessage = "Mark this order as Out for Delivery?";
+        url = "/markOutForDelivery";
+    }
+    else if(statusText === "Out for Delivery"){
+        confirmMessage = "Mark this order as Delivered?";
+        url = "/completeDelivery";
+    }
+
+    Swal.fire({
+        title: "Are you sure?",
+        text: confirmMessage,
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonText: "Yes"
+    }).then((result)=>{
+
+        if(result.isConfirmed){
+
+            $.ajax({
+                url: url,
+                type: "POST",
+
+                headers:{
+                    "token": token,
+                    "X-CSRFToken": "{{ csrf_token }}"
+                },
+
+                data:{ orderId: orderId },
+
+                success:function(res){
+
+                    Swal.fire({
+                        icon:"success",
+                        title: res.message
+                    });
+
+                    loadOrders("all");
+                }
+            });
+
+        }
+
+    });
+
+});
+
+
+// VIEW ORDER DETAILS
+$(document).on("click",".viewBtn",function(){
+
+    const orderId = $(this).data("id");
+
+    window.location.href = "/delivery_order_detail/" + orderId;
+
+});
+</script>
+
+</body>
+</html>

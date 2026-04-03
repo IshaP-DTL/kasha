@@ -1,0 +1,906 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/wishlist.css' %}">
+	<!-- Product -->
+	<div class="bg0 m-t-23 p-b-140">
+		<div class="container">
+			<div class="flex-w flex-sb-m p-b-52">
+				<div class="flex-w flex-l-m filter-tope-group m-tb-10" id="categoryFilter">
+
+    <button class="stext-106 hov1 bor3 how-active1" data-id="">
+        All Products
+    </button>
+
+    <button class="stext-106 hov1 bor3" data-id="1">Jeans</button>
+    <button class="stext-106 hov1 bor3" data-id="2">Dresses</button>
+    <button class="stext-106 hov1 bor3" data-id="3">Tops</button>
+    <button class="stext-106 hov1 bor3" data-id="4">Shirts</button>
+    <button class="stext-106 hov1 bor3" data-id="5">Trouser</button>
+
+</div>
+
+				<div class="flex-w flex-c-m m-tb-10">
+					<div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-filter">
+						<i class="icon-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-filter-list"></i>
+						<i class="icon-close-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+						 Filter
+					</div>
+
+					<div class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4 js-show-search">
+						<i class="icon-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-search"></i>
+						<i class="icon-close-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+						Search
+					</div>
+				</div>
+				
+				<!-- Search product -->
+				<div class="dis-none panel-search w-full p-t-10 p-b-15">
+					<div class="bor8 dis-flex p-l-15">
+						<button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
+							<i class="zmdi zmdi-search"></i>
+						</button>
+
+						<input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product" placeholder="Search">
+					</div>	
+				</div>
+
+				<!-- Filter -->
+				<div class="dis-none panel-filter w-full p-t-10">
+					<div class="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm">
+						<div class="filter-col1 p-r-15 p-b-27">
+    <div class="mtext-102 cl2 p-b-15">Sort By</div>
+
+    <ul>
+        <li class="p-b-6">
+            <a href="#" class="filter-link" data-sort="new">
+                New Launch
+            </a>
+        </li>
+        <li class="p-b-6">
+            <a href="#" class="filter-link" data-sort="price_low">
+                Price: Low to High
+            </a>
+        </li>
+        <li class="p-b-6">
+            <a href="#" class="filter-link" data-sort="price_high">
+                Price: High to Low
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+<div class="filter-col2 p-r-15 p-b-27">
+    <div class="mtext-102 cl2 p-b-15">Price</div>
+
+    <ul>
+        <li><a href="#" class="filter-link" data-start="" data-end="">All</a></li>
+        <li><a href="#" class="filter-link" data-start="0" data-end="500">₹0 - ₹500</a></li>
+        <li><a href="#" class="filter-link" data-start="500" data-end="1000">₹500 - ₹1000</a></li>
+        <li><a href="#" class="filter-link" data-start="1000" data-end="1500">₹1000 - ₹1500</a></li>
+        <li><a href="#" class="filter-link" data-start="1500" data-end="2000">₹1500 - ₹2000</a></li>
+        <li><a href="#" class="filter-link" data-start="2000" data-end="">₹2000+</a></li>
+    </ul>
+</div>
+
+
+						<div class="filter-col3 p-r-15 p-b-27">
+							<div class="mtext-102 cl2 p-b-15">
+								Color
+							</div>
+
+							<ul>
+								<li class="p-b-6">
+									<span class="fs-15 lh-12 m-r-6" style="color: #222;">
+										<i class="zmdi zmdi-circle"></i>
+									</span>
+
+									<a href="#" class="filter-link stext-106 trans-04">
+										Black
+									</a>
+								</li>
+
+								<li class="p-b-6">
+									<span class="fs-15 lh-12 m-r-6" style="color: #4272d7;">
+										<i class="zmdi zmdi-circle"></i>
+									</span>
+
+									<a href="#" class="filter-link stext-106 trans-04 filter-link-active">
+										Blue
+									</a>
+								</li>
+
+								<li class="p-b-6">
+									<span class="fs-15 lh-12 m-r-6" style="color: #f78fb3;">
+										<i class="zmdi zmdi-circle"></i>
+									</span>
+
+									<a href="#" class="filter-link stext-106 trans-04">
+										Pink
+									</a>
+								</li>
+
+								<li class="p-b-6">
+									<span class="fs-15 lh-12 m-r-6" style="color: #00ad5f;">
+										<i class="zmdi zmdi-circle"></i>
+									</span>
+
+									<a href="#" class="filter-link stext-106 trans-04">
+										Green
+									</a>
+								</li>
+
+								<li class="p-b-6">
+									<span class="fs-15 lh-12 m-r-6" style="color: #fa4251;">
+										<i class="zmdi zmdi-circle"></i>
+									</span>
+
+									<a href="#" class="filter-link stext-106 trans-04">
+										Red
+									</a>
+								</li>
+
+								<li class="p-b-6">
+									<span class="fs-15 lh-12 m-r-6" style="color: #aaa;">
+										<i class="zmdi zmdi-circle-o"></i>
+									</span>
+
+									<a href="#" class="filter-link stext-106 trans-04">
+										White
+									</a>
+								</li>
+							</ul>
+						</div>
+    <div class="filter-col4 p-b-27">
+    <div class="mtext-102 cl2 p-b-15">
+        Size
+    </div>
+
+    <ul>
+        <li class="p-b-6">
+            <a href="#" class="filter-link stext-106 trans-04">XS</a>
+        </li>
+
+        <li class="p-b-6">
+            <a href="#" class="filter-link stext-106 trans-04">S</a>
+        </li>
+
+        <li class="p-b-6">
+            <a href="#" class="filter-link stext-106 trans-04">M</a>
+        </li>
+
+        <li class="p-b-6">
+            <a href="#" class="filter-link stext-106 trans-04">L</a>
+        </li>
+
+        <li class="p-b-6">
+            <a href="#" class="filter-link stext-106 trans-04">XL</a>
+        </li>
+    </ul>
+</div>
+						
+					</div>
+				</div>
+			</div>
+<!-- Dynamic Products -->
+<div id="activeFilters" class="active-filters"></div>
+<div class="row isotope-grid" id="productContainer"></div>
+
+<!-- Pagination -->
+<div class="flex-c-m flex-w w-full p-t-38" id="paginationContainer"></div>
+		</div>
+	</div>
+
+<!-- CHATBOT BUTTON -->
+<div id="chatbotToggle">💬 </div>
+<div id="chatbotHint">
+Need help choosing outfits?
+</div>
+
+<!-- CHATBOT WINDOW -->
+<div id="chatbotBox">
+    <div class="chatbot-header">
+        <span>Kasha Assistant</span>
+        <button id="chatClose">✖</button>
+    </div>
+
+<div id="chatbotMessages">
+    <div class="bot-message" id="chatGreeting">
+        Hi there! 
+    </div>
+</div>
+
+    <div class="chatbot-input">
+        <input type="text" id="chatInput" placeholder="Type a message..." />
+        <button id="chatSend">Send</button>
+    </div>
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="{% static 'vendor/imagesloaded/imagesloaded.pkgd.min.js' %}"></script>
+<script src="{% static 'vendor/isotope/isotope.pkgd.min.js' %}"></script>
+<script src="{% static 'js/API.js' %}"></script>
+
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const body = params.get("body");
+
+let currentPage = 1;
+let limit = 8;
+
+let filters = {
+    categoryId: null,
+    startRange: null,
+    endRange: null,
+    sort: null,
+    color: null,
+    search: null,
+    size: null
+};
+function renderActiveFilters(){
+
+    let html = "";
+
+    if(filters.color){
+        html += `<div class="filter-chip">
+                    ${filters.color}
+                    <span onclick="removeFilter('color')">✕</span>
+                 </div>`;
+    }
+
+    if(filters.startRange || filters.endRange){
+        html += `<div class="filter-chip">
+                    ₹${filters.startRange || 0} - ₹${filters.endRange || '+'}
+                    <span onclick="removeFilter('price')">✕</span>
+                 </div>`;
+    }
+
+    if(filters.sort){
+        html += `<div class="filter-chip">
+                    ${filters.sort.replace('_',' ')}
+                    <span onclick="removeFilter('sort')">✕</span>
+                 </div>`;
+    }
+
+    if(filters.size){
+        html += `<div class="filter-chip">
+                    ${filters.size}
+                    <span onclick="removeFilter('size')">✕</span>
+                </div>`;
+        }
+
+    $("#activeFilters").html(html);
+}
+function removeFilter(type){
+
+    if(type=="color"){
+        filters.color=null;
+    }
+
+    if(type=="price"){
+        filters.startRange=null;
+        filters.endRange=null;
+    }
+
+    if(type=="sort"){
+        filters.sort=null;
+    }
+    if(type=="size"){
+        filters.size=null;
+        }
+
+    renderActiveFilters();
+    loadProducts(1);
+}
+
+function getChatbotParams() {
+    const params = new URLSearchParams(window.location.search);
+    return {
+        chatCategory: params.get("chatCategory"),
+        body: params.get("body"),
+        tone: params.get("tone"),
+        color: params.get("color")
+    };
+}
+
+const chatbotParams = getChatbotParams();
+if (chatbotParams.color) {
+    filters.color = chatbotParams.color;
+}
+// apply chatbot filters
+if (chatbotParams.chatCategory) {
+    filters.chatCategory = chatbotParams.chatCategory;
+}
+
+
+function getCategoryFromURL() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get("categoryId");
+}
+
+const cidFromURL = getCategoryFromURL();
+filters.categoryId =
+    cidFromURL && cidFromURL !== "undefined"
+        ? Number(cidFromURL)
+        : null;
+
+
+function loadCategories() {
+
+    $.ajax({
+        url: "{% url 'getAllCategory' %}",
+        type: "GET",
+        success: function (res) {
+
+            let html = "";
+            let urlCategory = getCategoryFromURL();
+
+            html += `
+                <button class="stext-106 hov1 bor3 ${!urlCategory ? 'how-active1' : ''}"
+                        data-id="">
+                    All Products
+                </button>
+            `;
+
+            res.data.forEach(cat => {
+
+                let active =
+                    urlCategory == cat.categoryId ? 'how-active1' : '';
+
+                html += `
+                    <button class="stext-106 hov1 bor3 ${active}"
+                            data-id="${cat.categoryId}">
+                        ${cat.categoryName}
+                    </button>
+                `;
+            });
+
+            $("#categoryFilter").html(html);
+        }
+    });
+}
+
+function loadProducts(page = 1) {
+
+    $.ajax({
+        url: "{% url 'getAllProduct' %}",
+        type: "GET",
+        data: {
+            page: page,
+            limit: limit,
+            categoryId: filters.categoryId,
+            chatCategory: filters.chatCategory,
+            tone: chatbotParams.tone,   // only for chatbot tone
+            startRange: filters.startRange,
+            endRange: filters.endRange,
+            sort: filters.sort,
+            color: filters.color,
+            body: body,
+            search: filters.search,
+            size: filters.size        
+        },
+        success: function (response) {
+
+            let html = "";
+            let total = response.total;
+            let totalPages = Math.ceil(total / limit);
+            currentPage = page;
+
+            response.data.forEach(prod => {
+                let colorDots = "";
+
+                if(prod.colorImages){
+                    prod.colorImages.forEach(c => {
+                        colorDots += `
+                        <span class="color-dot"
+                        style="background:${c.code}"
+                        data-img="${c.image}"
+                        data-id="${prod.productId}"
+                        data-color-id="${c.color_id}">
+                        </span>`;
+                    });
+                }
+                html += `
+                <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item">
+                    <div class="block2">
+                        <div class="block2-pic hov-img0">
+                            <img src="${prod.image}" class="product-img" id="img-${prod.productId}">
+                            <a href="/product-detail?productID=${prod.productId}"
+                               class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1">
+                                View Product
+                            </a>
+                        </div>
+                        <div class="block2-txt flex-w flex-t p-t-14">
+                            <div class="block2-txt-child1 flex-col-l">
+                                <a class="stext-104 cl4 hov-cl1">${prod.productName}</a>
+                                <span class="stext-105 cl3">₹${prod.price}</span>
+                                <div class="color-dots">
+                                    ${colorDots}
+                                </div>
+                            </div>
+                            <div class="block2-txt-child2 flex-r p-t-3">
+ <a href="#"
+   class="wishlist-icon js-wishlist"
+   data-product-id="${prod.productId}">
+   <i class="zmdi zmdi-favorite-outline"></i>
+</a>
+</div>
+                        </div>
+                    </div>
+                </div>`;
+            });
+
+            $("#productContainer").html(html);
+            loadUserWishlistIds();
+
+           
+
+            let paginationHTML = "";
+
+            if (totalPages > 1) {
+
+                // PREVIOUS BUTTON
+                if (page > 1) {
+                    paginationHTML += `
+                    <a href="javascript:void(0)"
+                    class="pagination-prev m-all-7"
+                    onclick="loadProducts(${page - 1})">
+                    &lt;
+                    </a>`;
+                }
+
+                // CURRENT PAGE
+                paginationHTML += `
+                <a href="javascript:void(0)"
+                class="flex-c-m how-pagination1 how-pagination1-active m-all-7">
+                ${page}
+                </a>`;
+
+                // NEXT PAGE NUMBER
+                if (page + 1 <= totalPages) {
+                    paginationHTML += `
+                    <a href="javascript:void(0)"
+                    class="flex-c-m how-pagination1 m-all-7"
+                    onclick="loadProducts(${page + 1})">
+                    ${page + 1}
+                    </a>`;
+                }
+
+                // DOTS + LAST PAGE
+                if (page + 1 < totalPages) {
+
+                    paginationHTML += `<span class="pagination-dots m-all-7">...</span>`;
+
+                    paginationHTML += `
+                    <a href="javascript:void(0)"
+                    class="flex-c-m how-pagination1 m-all-7"
+                    onclick="loadProducts(${totalPages})">
+                    ${totalPages}
+                    </a>`;
+                }
+            }
+
+            $("#paginationContainer").html(paginationHTML);
+            
+            let $grid = $('.isotope-grid');
+            if ($grid.data('isotope')) $grid.isotope('destroy');
+
+            $grid.imagesLoaded(function () {
+                $grid.isotope({
+                    itemSelector: '.isotope-item',
+                    layoutMode: 'fitRows'
+                });
+            });
+        }
+    });
+}
+$(document).on("click", "#categoryFilter button", function () {
+
+    $("#categoryFilter button").removeClass("how-active1");
+    $(this).addClass("how-active1");
+
+    const cid = $(this).data("id");
+if (cid) {
+    window.location.href = `/Product?categoryId=${cid}`;
+} else {
+    window.location.href = `/Product`;
+}
+
+
+
+    filters.startRange = null;
+    filters.endRange = null;
+    filters.sort = null;
+    filters.color = null;
+
+    $(".filter-link").removeClass("filter-link-active");
+
+    loadProducts(1);
+});
+
+
+$(document).on("click", ".filter-col1 a", function (e) {
+    e.preventDefault();
+
+    filters.sort = $(this).data("sort");
+
+    renderActiveFilters();
+    loadProducts(1);
+});
+
+$(document).on("click", ".filter-col2 a", function (e) {
+    e.preventDefault();
+
+    filters.startRange = $(this).data("start") || null;
+    filters.endRange = $(this).data("end") || null;
+
+    renderActiveFilters();
+    loadProducts(1);
+});
+
+$(document).on("click", ".filter-col3 a", function (e) {
+    e.preventDefault();
+
+    filters.color = $(this).text().trim();
+
+    renderActiveFilters();
+    loadProducts(1);
+});
+
+$(document).on("click", ".filter-col4 a", function(e){
+    e.preventDefault();
+
+    filters.size = $(this).text().trim();
+
+    renderActiveFilters();
+    loadProducts(1);
+});
+
+$(document).ready(function () {
+    $.ajax({
+        url: "/clear-chat-session/",
+        type: "POST",
+        headers: { "X-CSRFToken": getCSRFToken() },
+        success: function() { console.log("Chat memory cleared"); }
+    });
+    
+    loadCategories();
+    loadProducts();
+});
+$(document).on("click", ".color-dot", function(){
+
+    const img = $(this).data("img");
+    const id = $(this).data("id");
+    const colorId = $(this).data("color-id");
+
+    const productCard = $(this).closest(".block2");
+
+    // remove active only in this product
+    productCard.find(".color-dot").removeClass("active");
+    $(this).addClass("active");
+
+    // change image
+    $("#img-" + id).attr("src", img);
+
+    // ⭐ store selected color in product card
+    productCard.attr("data-selected-color", colorId);
+
+});
+let searchTimeout;
+
+$(document).on("keyup", "input[name='search-product']", function () {
+
+    clearTimeout(searchTimeout);
+
+    const value = $(this).val();
+
+    searchTimeout = setTimeout(function(){
+        filters.search = value;
+        loadProducts(1);
+    }, 400);
+
+});
+$(document).on("click", ".js-show-filter", function () {
+
+   
+    filters.startRange = null;
+    filters.endRange = null;
+    filters.sort = null;
+    filters.color = null;
+
+  
+    const activeCategory = $("#categoryFilter button.how-active1");
+    filters.categoryId = activeCategory.length
+        ? activeCategory.data("id") || null
+        : getCategoryFromURL();
+
+  
+    $(".filter-link").removeClass("filter-link-active");
+
+    $(".panel-filter").addClass("dis-none");
+    $(".icon-filter").removeClass("dis-none");
+    $(".icon-close-filter").addClass("dis-none");
+
+    loadProducts(1);
+});
+
+function loadUserWishlistIds() {
+
+    const token = localStorage.getItem("token");
+    if (!token) return;   // 👈 logged-out users see outline only
+
+    $.ajax({
+        url: "/getWishlistByUserId",
+        type: "GET",
+        headers: { "token": token },
+
+        success: function (res) {
+
+            // 1️⃣ collect wishlist product IDs
+            const ids = res.data.map(i => i.productId);
+
+            // 2️⃣ loop over products already shown
+            $(".js-wishlist").each(function () {
+
+                const pid = $(this).data("product-id");
+
+                // 3️⃣ if product is in wishlist → fill heart
+                if (ids.includes(pid)) {
+                    $(this).addClass("active")
+                           .find("i")
+                           .removeClass("zmdi-favorite-outline")
+                           .addClass("zmdi-favorite");
+                }
+            });
+        }
+    });
+}
+$(document).on("click", ".js-wishlist", function () {
+
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+        window.location.href = "/login";
+        return;
+    }
+
+    const productId = $(this).data("product-id");
+    const productCard = $(this).closest(".block2");
+
+    let colorId = productCard.attr("data-selected-color");
+
+    if(!colorId){
+        colorId = productCard.find(".color-dot").first().data("color-id");
+    }
+
+    console.log("Sending colorId:", colorId); // debug
+
+    $.ajax({
+        url: "/addOrRemoveWishlist",
+        type: "POST",
+        contentType: "application/json",
+        headers:{
+            token: token,
+            "X-CSRFToken": getCSRFToken()
+        },
+        data: JSON.stringify({
+            productId: productId,
+            colorId: colorId
+        }),
+        success: function(){
+            loadUserWishlistIds();
+        }
+    });
+
+});
+
+
+</script>
+<script>
+function getFilterParams() {
+    const params = new URLSearchParams(window.location.search);
+    return {
+        body: params.get("body"),
+        tone: params.get("tone"),
+        category: params.get("category")
+    };
+}
+
+const chatbotFilters = getFilterParams();
+
+const toggleBtn = document.getElementById("chatbotToggle");
+const chatBox = document.getElementById("chatbotBox");
+const closeBtn = document.getElementById("chatClose");
+const sendBtn = document.getElementById("chatSend");
+const input = document.getElementById("chatInput");
+const messages = document.getElementById("chatbotMessages");
+
+/* TOGGLE */
+toggleBtn.onclick = () => {
+    chatBox.style.display = "flex";
+};
+
+closeBtn.onclick = () => {
+    chatBox.style.display = "none";
+};
+
+/* ADD MESSAGE */
+function addMessage(text, type) {
+    const div = document.createElement("div");
+    div.className = type === "user" ? "user-message" : "bot-message";
+    div.innerText = text;
+    messages.appendChild(div);
+    messages.scrollTop = messages.scrollHeight;
+}
+
+/* ADD BOT MESSAGE WITH BUTTONS */
+function addBotMessage(data) {
+    if (!data.reply) return;
+
+    addMessage(data.reply, "bot");
+
+    /* SKIN TONE BUTTONS */
+    /* SKIN TONE BUTTONS */
+if (data.reply.includes("What is your skin tone?")) {
+    const div = document.createElement("div");
+    div.className = "bot-buttons";
+
+    div.innerHTML = `
+        <button onclick="quickReply('warm')">Warm</button>
+        <button onclick="quickReply('cool')">Cool</button>
+        <button onclick="quickReply('not sure')">Not sure</button>
+    `;
+    messages.appendChild(div);
+}
+
+/* VEIN BUTTONS */
+if (data.reply.includes("Check wrist veins")) {
+    const div = document.createElement("div");
+    div.className = "bot-buttons";
+
+    div.innerHTML = `
+        <button onclick="quickReply('green')">Green veins</button>
+        <button onclick="quickReply('blue')">Blue veins</button>
+        <button onclick="quickReply('purple')">Purple veins</button>
+    `;
+    messages.appendChild(div);
+}
+}
+
+/* QUICK REPLY FUNCTION */
+window.quickReply = function(text) {
+    addMessage(text, "user");
+
+    fetch("/chatbot", {
+        method: "POST",
+        headers: { 
+            "Content-Type": "application/json", 
+             "X-CSRFToken": getCSRFToken()
+        },
+        body: JSON.stringify({ message: text })
+    })
+    .then(res => res.json())
+    .then(data => {
+        addBotMessage(data);
+
+        if (data.products && data.products.length > 0) {
+            showProductLink(data);
+        }
+    });
+};
+
+/* SHOW PRODUCT LINK */
+function showProductLink(data) {
+
+    const div = document.createElement("div");
+    div.className = "bot-message";
+
+    const body = data.body || "";
+    const tone = data.tone || "";
+    const item = data.item || "";
+    const color = data.color || "";
+
+    let url = "/Product";
+
+    let params = [];
+
+    if(item) params.push(`chatCategory=${item}`);
+    if(body) params.push(`body=${body}`);
+    if(tone) params.push(`tone=${tone}`);
+    if(color) params.push(`color=${color}`);
+
+    if(params.length > 0){
+        url += "?" + params.join("&");
+    }
+
+    let text = "See recommended clothes for you";
+
+    if(item){
+        text = `See recommended ${item} for you`;
+    }
+
+    div.innerHTML = `<a href="${url}">${text}</a>`;
+    messages.appendChild(div);
+}
+
+/* SEND MESSAGE */
+sendBtn.onclick = sendMessage;
+input.addEventListener("keypress", e => {
+    if (e.key === "Enter") sendMessage();
+});
+
+
+function getCSRFToken() {
+    let cookieValue = null;
+    const cookies = document.cookie.split(";");
+
+    for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        if (cookie.startsWith("csrftoken=")) {
+            cookieValue = cookie.substring("csrftoken=".length);
+            break;
+        }
+    }
+    return cookieValue;
+}
+
+function sendMessage() {
+    const text = input.value.trim();
+    if (!text) return;
+
+    addMessage(text, "user");
+    input.value = "";
+
+    fetch("/chatbot", {
+        method: "POST",
+        headers: {
+                 "Content-Type": "application/json",
+                 "X-CSRFToken": getCSRFToken() 
+    },
+        body: JSON.stringify({ message: text })
+    })
+    .then(res => res.json())
+    .then(data => {
+        addBotMessage(data);
+
+        if (data.products && data.products.length > 0) {
+            showProductLink(data);
+        }
+    });
+}
+setTimeout(function(){
+    document.getElementById("chatbotHint").style.display = "block";
+}, 5000);
+toggleBtn.onclick = () => {
+    chatBox.style.display = "flex";
+    document.getElementById("chatbotHint").style.display = "none";
+};
+
+
+
+document.addEventListener("DOMContentLoaded", function(){
+
+  const name = localStorage.getItem("username");
+
+  if(name){
+      const greet = document.getElementById("chatGreeting");
+      if(greet){
+          greet.innerText = `Hi ${name}!`;
+      }
+  }
+
+});
+
+$(".color-dot").removeClass("active");
+$(this).addClass("active");
+$("#productColor").val(colorId);
+
+
+</script>
+{% endblock content %}
+
+
+

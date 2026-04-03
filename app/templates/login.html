@@ -1,0 +1,105 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+<body>
+
+<div class="bg-overlay"></div>
+
+<div class="card">
+  <h2>Login</h2>
+
+  {% if already_logged_in %}
+    <div class="alert alert-info" style="margin-bottom:15px;">
+      You are already logged in
+    </div>
+  {% endif %}
+
+  <form method="post">
+    <div id="message"></div>
+    {% csrf_token %}
+    <input type="email" name="email" placeholder="Email" id="email">
+    <input type="password" name="password" placeholder="Password" id="password">
+
+    <button type="submit" id="loginButton">Login</button>
+    <div class="forgot-wrap">
+  <a href="{% url 'forgetpassword' %}" class="forgot-link">Forgot password?</a>
+</div>
+
+    <p class="text">
+      Don’t have an account?
+      <a href="{% url 'register' %}">Register</a>
+    </p>
+  </form>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="{% static 'js/API.js' %}"></script>
+<script>
+  $(document).ready(function () {
+
+    $("#loginButton").on("click", function (e) {
+      e.preventDefault();
+
+      let email = $("#email").val().trim();
+      let password = $("#password").val().trim();
+
+      $("#message").empty();
+
+      let data = {
+        Email: email,
+        passWord: password
+      };
+      $.ajax({
+        url: '{% url "LoginUser" %}',
+        {% comment %} url: `${API_PATH}loginUser`, {% endcomment %}
+        type: "POST",
+        headers: {
+          'X-CSRFToken': '{{ csrf_token }}'
+        },
+        data: data,
+        success: function (response) {
+          localStorage.setItem("token", response.token);
+          localStorage.setItem("username", response.userName);
+          window.location.href = "{% url 'homePage' %}";
+        },
+
+        error: function (err) {
+          console.log("err", err);
+          $("#message").empty();
+
+          if (err.responseJSON) {
+            const errorResponse = err.responseJSON;
+
+            // 🔁 redirect only if user not found
+            if (
+              errorResponse.error === "user not found" ||
+              errorResponse.error === "user not found!!"
+            ) {
+              window.location.href = "{% url 'register' %}";
+              return;
+            }
+
+            // ❌ show backend validation error
+            if (errorResponse.error) {
+              $("#message").html(
+                `<div class="alert alert-danger">${errorResponse.error}</div>`
+              );
+              return;
+            }
+          }
+
+          $("#message").html(
+            `<div class="alert alert-danger">Please try again</div>`
+          );
+        }
+      });
+    });
+
+  });
+</script>
+</body>
+</html>

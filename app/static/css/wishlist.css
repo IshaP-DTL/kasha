@@ -1,0 +1,438 @@
+/* ===============================
+   Wishlist Page Styles
+   =============================== */
+ 
+.wishlist-card {
+    position: relative;
+    border: 1px solid #eee;
+    background: #fff;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+ 
+.wishlist-card:hover {
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    transform: translateY(-4px);
+}
+ 
+/* Product Image */
+.wishlist-img {
+    width: 100%;
+    height: 280px;
+    object-fit: contain;    
+    background: #fff;
+    padding: 10px;
+}
+ 
+/* Product Info */
+.wishlist-info {
+    padding: 12px;
+    text-align: center;
+}
+ 
+.wishlist-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 6px;
+}
+ 
+.wishlist-price {
+    font-size: 15px;
+    font-weight: 600;
+    color: #000;
+}
+ 
+/* Add to Cart Button */
+.wishlist-btn {
+    width: 100%;
+    border: none;
+    background: #222;
+    color: #fff;
+    padding: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: 0.3s;
+}
+ 
+.wishlist-btn:hover {
+    background: #ff3f6c;
+}
+ 
+/* Remove Icon */
+.wishlist-remove {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: none;
+    background: #fff;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    font-size: 18px;
+    line-height: 26px;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    transition: 0.3s;
+}
+ 
+.wishlist-remove:hover {
+    background: #ff3f6c;
+    color: #fff;
+}
+ 
+/* Empty Wishlist */
+.wishlist-empty {
+    text-align: center;
+    padding: 80px 0;
+    font-size: 18px;
+    color: #777;
+}
+ 
+/* ===============================
+   WISHLIST ICON (IMPORTANT PART)
+   =============================== */
+ 
+/* Remove default anchor styling */
+.wishlist-icon {
+    text-decoration: none;
+    color: inherit;
+}
+ 
+/* Default icon – outline heart */
+.wishlist-icon i {
+    font-size: 18px;
+    color: #000 !important;   /* force black */
+    transition: transform 0.2s ease;
+}
+ 
+/* Active (added to wishlist) – filled heart */
+.wishlist-icon.active i {
+    color: #000 !important;   /* still black */
+}
+ 
+/* Hover effect (scale only, no color change) */
+.wishlist-icon:hover i {
+    transform: scale(1.1);
+}
+/* Wishlist title */
+.wishlist-title,
+.wishlist-title span {
+    background: transparent !important;
+    color: #111 !important;   /* strong dark color */
+    font-weight: 600;
+}
+.wishlist-card {
+    display: flex;
+    flex-direction: column;
+}
+ 
+.wishlist-info {
+    margin-top: auto;
+}
+.wishlist-title a {
+    color: #000 !important;
+    background: transparent !important;
+}
+ 
+/* Remove browser text selection blue */
+.wishlist-title::selection,
+.wishlist-title *::selection {
+    background: transparent;
+    color: #000;
+}
+ 
+/* Wishlist title force black (no hover color change) */
+.mtext-111 {
+    color: #000 !important;
+}
+ 
+.mtext-111 span {
+    color: #000 !important;
+}
+ 
+/* Prevent hover color change */
+.mtext-111:hover,
+.mtext-111:hover span {
+    color: #000 !important;
+}
+/* Wishlist product card */
+.wishlist-card,
+.block2 {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+ 
+/* Product image container */
+.block2-pic {
+    width: 100%;
+    height: 320px;          /* same height for all cards */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: #fff;
+}
+ 
+/* Product image */
+.block2-pic img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;    /* IMPORTANT */
+}
+/* MOVE TO BAG BUTTON */
+.wishlist-btn {
+    width: 100%;
+    background-color: #000;
+    color: #fff;
+    border: 1px solid #000;
+    padding: 10px 0;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 0; /* rectangle */
+}
+ 
+/* HOVER EFFECT */
+.wishlist-btn:hover {
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #000;
+}
+.size-box-wrapper {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+ 
+.size-box {
+  width: 44px;
+  height: 44px;
+  border: 1.5px solid #cfcfcf;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+}
+ 
+.size-box.active {
+  border: 2px solid #000;
+}
+ 
+.size-box.disabled {
+  color: #9aa5b1;
+  background: #f2f4f7;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+ 
+/* Size dropdown look */
+.styled-size {
+    padding: 6px 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-weight: 600;
+}
+ 
+/* Disabled sizes (blur / grey) */
+.styled-size option:disabled {
+    color: #aaa;
+    background: #f5f5f5;
+}
+ 
+/* Selected size (blue + bold) */
+.styled-size option:checked {
+    color: #2874f0;
+    font-weight: 700;
+}
+.styled-size {
+    padding: 6px 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-weight: 600;
+}
+ 
+.styled-size option:disabled {
+    color: #aaa;
+    background: #f5f5f5;
+}
+ 
+.styled-size option:checked {
+    color: #2874f0;
+    font-weight: 700;
+}
+ 
+ 
+/* ===============================
+   CART PAGE LAYOUT SPACING
+   =============================== */
+/* ===============================
+   CART TABLE – FINAL CLEAN LAYOUT
+   =============================== */
+ 
+.table-shopping-cart {
+    width: 100%;
+    table-layout: fixed;
+}
+ 
+/* PRODUCT IMAGE */
+.table-shopping-cart th.column-1,
+.table-shopping-cart td.column-1 {
+    width: 90px;
+}
+ 
+/* NAME (narrower so gap appears) */
+.table-shopping-cart th.column-2,
+.table-shopping-cart td.column-2 {
+    width: 240px;
+    padding-right: 10px;
+    line-height: 1.6;
+}
+ 
+ 
+/* SIZE */
+.table-shopping-cart th.column-4,
+.table-shopping-cart td.column-4 {
+    width: 110px;
+    text-align: center;
+}
+ 
+/* QUANTITY */
+.table-shopping-cart th.column-5,
+.table-shopping-cart td.column-5 {
+    width: 160px;
+    text-align: center;
+}
+ 
+/* TOTAL */
+.table-shopping-cart th.column-6,
+.table-shopping-cart td.column-6 {
+    width: 120px;
+    text-align: right;
+}
+ 
+/* Quantity box small */
+.qty-box {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    min-width: 95px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+}
+ 
+.qty-btn {
+    width: 26px;
+    height: 28px;
+    font-size: 14px;
+    background: #fff;
+    border: none;
+}
+ 
+.qty-number {
+    width: 28px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
+}
+ 
+/* Size dropdown compact */
+.styled-size {
+    min-width: 56px;
+    height: 30px;
+    font-size: 13px;
+    font-weight: 600;
+}
+ 
+/* Left & Right boxes */
+.wrap-table-shopping-cart {
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    padding: 20px;
+}
+ 
+.bor10 {
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    padding: 30px;
+}
+ 
+/* Space between cart table & totals */
+@media (min-width: 1200px) {
+    .col-xl-7 {
+        padding-right: 35px;
+    }
+    .col-xl-5 {
+        padding-left: 35px;
+    }
+}
+/* ===== ONLY PRICE COLUMN SPACING FIX ===== */
+ 
+/* ===============================
+   FINAL PRICE–NAME SPACING FIX
+   =============================== */
+ 
+/* Force table to respect widths */
+.table-shopping-cart {
+    table-layout: fixed !important;
+}
+ 
+/* NAME column – make it smaller */
+.table-shopping-cart th.column-2,
+.table-shopping-cart td.column-2 {
+    width: 210px !important;     /* reduce name width */
+    padding-right: 10px !important;
+    white-space: normal;
+}
+ 
+/* PRICE column – push it right */
+.table-shopping-cart th.column-3,
+.table-shopping-cart td.column-3 {
+    width: 140px !important;
+    padding-left: 40px !important;  /* 👈 this creates the gap */
+    font-weight: 600;
+}
+/* ===============================
+   MOBILE CART FIX
+   =============================== */
+@media (max-width: 768px) {
+ 
+    .table-shopping-cart th.column-3,
+    .table-shopping-cart td.column-3 {
+        padding-left: 10px !important;
+        width: auto !important;
+    }
+ 
+    .table-shopping-cart th.column-2,
+    .table-shopping-cart td.column-2 {
+        width: auto !important;
+    }
+ 
+    .qty-box {
+        min-width: 80px;
+    }
+}
+/* Bold in-stock sizes */
+.styled-size option.in-stock {
+    font-weight: 700;
+}
+ 
+/* Grey out-of-stock */
+.styled-size option.out-stock {
+    color: #999;
+}
+ 
+#alert-container{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    width: 320px;
+}

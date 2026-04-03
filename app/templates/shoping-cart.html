@@ -1,0 +1,351 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+ 
+<div class="bg0 p-t-75 p-b-85 ">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
+                <div class="wrap-table-shopping-cart">
+                    <table class="table-shopping-cart">
+                        <thead>
+                            <tr class="table_head">
+                            <th class="column-1">Product</th>
+                            <th class="column-2">Name</th>
+                            <th class="column-3">Price</th>
+                            <th class="column-4">Size</th>
+                            <th class="column-5">Quantity</th>
+                            <th class="column-6">Total</th>
+                           
+                        </tr>
+                        </thead>
+                        <tbody id="cartBody"></tbody>
+                    </table>
+                </div>
+            </div>
+ 
+            <div class="col-sm-10 col-lg-7 col-xl-5 m-lr-auto m-b-50">
+                <div class="bor10 p-lr-40 p-t-30 p-b-40">
+                    <h4 class="mtext-109 cl2 p-b-30">Cart Totals</h4>
+ 
+                    <div class="flex-w flex-t bor12 p-b-13">
+                        <div class="size-208">
+                            <span class="stext-110 cl2">Subtotal:</span>
+                        </div>
+                        <div class="size-209">
+                            <span class="mtext-110 cl2 cart-total">₹0</span>
+                        </div>
+                    </div>
+ 
+                    <div class="flex-w flex-t p-t-27 p-b-33">
+                        <div class="size-208">
+                            <span class="mtext-101 cl2">Total:</span>
+                        </div>
+                        <div class="size-209 p-t-1">
+                            <span class="mtext-110 cl2 final-total">₹0</span>
+                        </div>
+                    </div>
+ 
+                   <a href="javascript:void(0)" id="checkoutBtn"
+   class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04">
+   Proceed to Checkout
+</a>
+                </div>
+            </div>
+        </div>
+    </div>
+<div id="alert-container"
+     style="position:fixed; bottom:20px; right:20px; z-index:9999; width:320px;">
+</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+<script>
+const token = localStorage.getItem("token")
+const csrftoken = getCookie('csrftoken')
+ 
+function loadCart() {
+    $.ajax({
+        url: "/getAllCart",
+        type: "GET",
+        headers: { token },
+        success: function (res) {
+ 
+            let html = ""
+            let subtotal = 0
+            const items = res.items
+ 
+            if (!items || items.length === 0) {
+                $("#cartBody").html(`
+                    <tr>
+                        <td colspan="7" class="text-center p-4">
+                            Your cart is empty
+                        </td>
+                    </tr>
+                `)
+                $(".cart-total").text("₹0")
+                $(".final-total").text("₹0")
+                return
+            }
+ 
+            items.forEach(item => {
+    const price = parseFloat(item.price)
+    const quantity = parseInt(item.quantity)
+    const total = parseFloat(item.totalPrice)
+ 
+    subtotal += total
+html += `
+<tr class="table_row" data-id="${item.cartItemId}">
+    <td class="column-1">
+        <div class="product-wrap">
+            <button class="remove-item remove-left">✕</button>
+            <img src="${item.image}" class="cart-img">
+        </div>
+    </td>
+ 
+    <td class="column-2">${item.productName}</td>
+ 
+    <td class="column-3">₹${price}</td>
+ 
+    <!-- ✅ SIZE COLUMN (FIXED) -->
+    <td class="column-4">
+    <select class="size-select styled-size"
+            data-id="${item.cartItemId}">
+ 
+        ${
+            item.sizes.map(sz => {
+ 
+                const sizeName = sz.size_id__size_name;
+                const stockQty = sz.stock_quantity;
+                const isSelected = sizeName === item.selectedSize;
+                const isOut = stockQty === 0;
+ 
+                    return `
+                    <option value="${sizeName}"
+                        data-stock="${stockQty}"
+                        ${isSelected ? "selected" : ""}
+                        ${isOut && !isSelected ? "disabled" : ""}>
+                        ${sizeName}
+                    </option>
+                    `;
+            }).join("")
+        }
+ 
+    </select>
+</td>
+    <td class="column-5">
+        <div class="qty-box">
+            <button class="qty-btn btn-num-product-down">−</button>
+            <span class="qty-number">${quantity}</span>
+            <button class="qty-btn btn-num-product-up">+</button>
+        </div>
+    </td>
+ 
+    <td class="column-6">₹${total}</td>
+</tr>
+`;
+})
+            $("#cartBody").html(html)
+            $(".cart-total").text("₹" + subtotal)
+            $(".final-total").text("₹" + subtotal)
+        }
+    })
+}
+ 
+function updateQuantity(cartItemId, action) {
+    $.ajax({
+        url: "/cartItemQuantityPlusOrMinus",
+        type: "POST",
+        headers: {
+            token: token,
+            "X-CSRFToken": csrftoken
+        },
+        data: {
+            cartItemId: cartItemId,
+            action: action
+        },
+        success: function (res) {
+ 
+            // ✅ IF BACKEND SENDS ERROR
+            if (res.error) {
+                showAlert(res.error, "danger");
+                return;
+            }
+ 
+           const row = $(`.table_row[data-id="${cartItemId}"]`);
+ 
+    let qtyElement = row.find(".qty-number");
+    let currentQty = parseInt(qtyElement.text());
+ 
+    if (action === "plus") currentQty++;
+    if (action === "minus" && currentQty > 1) currentQty--;
+ 
+    qtyElement.text(currentQty);
+ 
+    // ✅ UPDATE TOTAL PRICE
+    let price = parseFloat(row.find(".column-3").text().replace("₹", ""));
+    let newTotal = price * currentQty;
+ 
+    row.find(".column-6").text("₹" + newTotal);
+ 
+    // ✅ UPDATE CART TOTAL
+    updateCartTotal();
+        }
+    })
+}
+ 
+function removeCart(cartItemId) {
+    $.ajax({
+        url: "/removeCartItem",
+        type: "POST",
+        headers: {
+            token: token,
+            "X-CSRFToken": csrftoken
+        },
+        data: { cartItemId },
+        success: function () {
+            loadCart()
+        }
+    })
+}
+ 
+$(document).ready(function () {
+    if (!token) {
+        window.location.href = "/login"
+        return
+    }
+ 
+    loadCart()
+$(document).on("click", ".btn-num-product-up", function () {
+ 
+    const row = $(this).closest(".table_row");
+ 
+    const selectedOption = row.find(".size-select option:selected");
+ 
+    const maxStock = parseInt(selectedOption.data("stock")) || 0;
+ 
+    let qty = parseInt(row.find(".qty-number").text()) || 0;
+ 
+    // 🔴 IMPORTANT CHECK
+    if (qty >= maxStock) {
+        showAlert(`Only ${maxStock} products available ❌`, "danger");
+        return;
+    }
+ 
+    updateQuantity(row.data("id"), "plus");
+});
+ 
+    $(document).on("click", ".btn-num-product-down", function () {
+ 
+    const row = $(this).closest(".table_row");
+    const cartItemId = row.data("id");
+ 
+    let qty = parseInt(row.find(".qty-number").text()) || 0;
+ 
+    // 🔴 IF QTY = 1 → REMOVE PRODUCT
+    if (qty <= 1) {
+        removeCart(cartItemId);
+        showAlert("Product removed from cart ❌", "danger");
+        return;
+    }
+ 
+    // ✅ NORMAL DECREASE
+    updateQuantity(cartItemId, "minus");
+});
+ 
+    $(document).on("click", ".remove-item", function () {
+        const row = $(this).closest(".table_row")
+        removeCart(row.data("id"))
+    })
+})
+ 
+function getCookie(name) {
+    let cookieValue = null
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';')
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim()
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1))
+                break
+            }
+        }
+    }
+    return cookieValue
+}
+$(document).on("change", ".size-select", function () {
+    const cartItemId = $(this).data("id")
+    const newSize = $(this).val()
+ 
+    $.ajax({
+        url: "/updateCartItemSize",
+        type: "POST",
+        headers: {
+            token: token,
+            "X-CSRFToken": csrftoken
+        },
+        data: {
+            cartItemId: cartItemId,
+            size: newSize
+        },
+        success: function () {
+ 
+    // ✅ REMOVE ONLY THAT ROW
+    $(`.table_row[data-id="${cartItemId}"]`).remove();
+ 
+    // ✅ UPDATE TOTAL
+    updateCartTotal();
+ 
+    showAlert("Product removed from cart ❌", "danger");
+}
+    })
+})
+$(document).on("click", "#checkoutBtn", function () {
+ 
+    const rows = $("#cartBody .table_row");
+ 
+    // ❌ EMPTY CART
+    if (rows.length === 0) {
+        showAlert("Your cart is empty ❌", "danger");
+        return;
+    }
+ 
+    // ✅ NOT EMPTY
+    window.location.href = "/checkout";
+});
+function showAlert(message, type="danger") {
+ 
+    // remove old alert
+    $("#alert-container").html("");
+ 
+    const alertHTML = `
+    <div class="alert alert-${type} alert-dismissible fade show shadow" role="alert">
+        ${message}
+        <button type="button" class="close" data-dismiss="alert">
+            <span>&times;</span>
+        </button>
+    </div>
+    `;
+ 
+    $("#alert-container").append(alertHTML);
+ 
+    // auto close after 4 sec
+    setTimeout(function(){
+        $("#alert-container .alert").alert('close');
+    }, 4000);
+}
+function updateCartTotal() {
+    let subtotal = 0;
+ 
+    $(".table_row").each(function () {
+        let total = parseFloat($(this).find(".column-6").text().replace("₹", "")) || 0;
+        subtotal += total;
+    });
+ 
+    $(".cart-total").text("₹" + subtotal);
+    $(".final-total").text("₹" + subtotal);
+}
+</script>
+{% endblock content %}
+ 
+ 

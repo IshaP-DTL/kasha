@@ -1,0 +1,302 @@
+/* 🔒 PROFILE PAGE ISOLATION */
+.profile-page {
+    width: 100%;
+    background: #f5f6fa;
+    padding: 40px 0;
+    color: #000;
+}
+
+
+
+/* CENTER CONTENT */
+.profile-container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+/* HEADER */
+.profile-header {
+    background: #fff;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.profile-info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* PROFILE IMAGE */
+.profile-pic-wrapper {
+    width: 80px;
+    height: 80px;
+    position: relative;
+    cursor: pointer;
+}
+
+.profile-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #eee;
+}
+
+.edit-overlay {
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1c1d1f;
+    color: #fff;
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 12px;
+}
+
+/* TEXT */
+.profile-text h2 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.profile-text .email {
+    font-size: 14px;
+    color: #777;
+}
+
+/* FORM */
+.profile-form {
+    background: #fff;
+    border-radius: 16px;
+    padding: 30px;
+}
+.profile-page .row {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+
+/* ROWS */
+/* .row {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    margin-bottom: 20px;
+} */
+
+.field {
+    flex: 1;
+}
+
+.field label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+}
+
+.field input,
+.field select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+}
+
+/* EMAIL SECTION */
+.email-box {
+    margin-top: 30px;
+}
+
+.email-box h4 {
+    margin-bottom: 12px;
+}
+
+.email-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.email-icon {
+    width: 36px;
+    height: 36px;
+    background: #eef2ff;
+    color: #4a6cf7;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.email-text {
+    margin: 0;
+    font-weight: 500;
+}
+
+.email-time {
+    font-size: 12px;
+    color: #999;
+}
+
+
+/* SAVE BUTTON */
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    gap: 16px;
+}
+
+.profile-btn {
+    background: #4a6cf7;
+    color: #fff;
+    padding: 12px 30px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .profile-page .row {
+        flex-direction: column;
+    }
+}
+
+
+/* EMAIL SECTION TEXT */
+.email-box h4,
+.email-text {
+    color: #000 !important;
+}
+
+/* EMAIL TIME (slightly gray) */
+.email-time {
+    color: #777 !important;
+}
+
+/* REMOVE LINK / HOVER COLOR ISSUE */
+.email-item,
+.email-item * {
+    color: #000 !important;
+    text-decoration: none;
+}
+/* ============================= */
+/* COMMON OUTLINE BUTTON STYLE */
+/* ============================= */
+
+.profile-btn,
+.add-email-btn {
+  background-color: transparent;
+  border: 1.5px solid #000;
+  color: #000;
+  padding: 12px 28px;
+  border-radius: 30px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Hover effect (same as View Product) */
+.profile-btn:hover,
+.add-email-btn:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+
+.email-actions {
+    display: flex;
+    flex-direction: column;   /* 🔑 makes buttons vertical */
+    gap: 14px;
+    margin-top: 20px;
+    width: fit-content;
+}
+
+.add-email-btn,
+.save-profile-btn {
+    padding: 12px 28px;
+    border-radius: 30px;
+    border: 1.5px solid #000;
+    background: #fff;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.add-email-btn:hover,
+.save-profile-btn:hover {
+    background: #000;
+    color: #fff;
+}
+
+
+/* Save profile button center */
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.profile-message {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    font-weight: 500;
+}
+.profile-message.error {
+    background: #ffe4e6;
+    color: #9f1239;
+}
+
+.profile-message.success {
+    background: #e6fffa;
+    color: #065f46;
+}
+.phone-text {
+    font-size: 14px;
+    color: #555;
+    margin-left: 45px;
+}
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.contact-icon {
+    width: 40px;
+    height: 40px;
+    background: #eef2ff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+}
+
+.contact-text .label {
+    font-size: 12px;
+    color: #888;
+    margin: 0;
+}
+
+.contact-text .value {
+    font-size: 15px;
+    font-weight: 500;
+    margin: 0;
+    color: #111;
+}

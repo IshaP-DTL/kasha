@@ -1,0 +1,64 @@
+{% load static %}
+<html>
+<head>
+  <title>Verify OTP</title>
+  <meta name="csrf-token" content="{{ csrf_token }}">
+  <link rel="stylesheet" href="{% static 'css/login.css' %}">
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+
+<div class="bg-overlay"></div>
+
+<div class="card">
+  <h2>Verify OTP</h2>
+
+  <input type="text" id="otp" placeholder="Enter OTP" maxlength="6">
+
+  <button id="verifyOtp">Verify OTP</button>
+
+  <div class="text">
+    <a href="{% url 'login' %}">← Back to Login</a>
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="{% static 'js/API.js' %}"></script>
+<script>
+$("#verifyOtp").on("click", function () {
+
+  const otp = $("#otp").val().trim();
+  const email = localStorage.getItem("fp_email");
+
+  if (!otp) {
+    alert("Please enter OTP");
+    return;
+  }
+  const csrftoken = document.querySelector(
+    '[name=csrf-token]'
+  ).content;
+
+  $.ajax({
+    url: "{% url 'verifyOtp' %}",
+    type: "POST",
+    headers: {
+      "X-CSRFToken": csrftoken
+    },
+    contentType: "application/json",
+    data: JSON.stringify({
+      email: email,
+      otp: otp
+    }),
+    success: function (res) {
+      alert(res.Message);
+      localStorage.setItem("token", res.token);
+      window.location.href = "{% url 'resetpassword' %}";
+    },
+    error: function (err) {
+      alert(err.responseJSON?.Message || "Invalid OTP");
+    }
+  });
+});
+</script>
+
+</body>
+</html>

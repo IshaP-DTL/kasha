@@ -1,0 +1,181 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  height: 100vh;
+  background: url("../images/slvy.jpg") no-repeat center center / cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bg-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.card {
+  position: relative;
+  width: 360px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+  color: white;
+}
+
+.card h2 {
+  margin-bottom: 20px;
+}
+
+/* default inputs */
+.card input,
+.card select {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+}
+
+/* PHONE ROW */
+.phone-row {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+.phone-row select {
+  width: 35%;
+}
+
+.phone-row input[type="tel"] {
+  width: 65%;
+}
+
+/* button */
+.card button {
+  width: 100%;
+  padding: 12px;
+  background: #ff4d6d;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.card button:hover {
+  background: #e63b58;
+}
+
+.text {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.text a {
+  color: #ffd1dc;
+  text-decoration: none;
+}
+/* Forgot password link (login page only) */
+.forgot-wrap {
+  margin-top: 12px;
+  text-align: center;
+}
+
+.forgot-link {
+  font-size: 14px;
+  color: #ffffff;
+  opacity: 0.85;
+  text-decoration: none;
+}
+
+.forgot-link:hover {
+  text-decoration: underline;
+  opacity: 1;
+}
+
+/* FULL PAGE CENTER */
+.auth-page {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: url("../images/slvy.jpg") no-repeat center center / cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* DARK OVERLAY */
+.auth-page .bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1;
+}
+
+/* CENTER GLASS BOX */
+.auth-card {
+  position: relative;
+  z-index: 2;
+  width: 380px;
+  padding: 30px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(15px);
+  text-align: center;
+  color: #fff;
+}
+
+/* TITLE */
+.auth-card h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+/* INPUTS */
+.auth-card input {
+  width: 100%;
+  padding: 14px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  margin-bottom: 15px;
+  font-size: 15px;
+}
+
+/* BUTTON */
+.auth-card button {
+  width: 100%;
+  padding: 14px;
+  background: #ff4d6d;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.auth-card button:hover {
+  background: #e63b58;
+}
+
+/* FOOTER TEXT */
+.auth-text {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.auth-text a {
+  color: #ffd1dc;
+  text-decoration: none;
+}

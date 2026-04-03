@@ -1,0 +1,545 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+ 
+<section class="checkout_area">
+  <div class="container">
+    <div class="row">
+ 
+      <!-- LEFT SIDE -->
+      <div class="col-lg-8">
+        <div class="billing_details_box">
+          <h3>Billing Details</h3>
+ 
+          <form id="addressForm" class="row">
+            {% csrf_token %}
+ 
+            <!-- ALL INPUT FIELDS -->
+            <div id="allTextBoxes" class="col-12">
+ 
+  <div class="row">
+    <div class="col-md-6 form-group">
+      <input type="text" id="fullName" class="form-control" placeholder="Full name *">
+    </div>
+ 
+    <div class="col-md-6 form-group">
+      <input type="text" id="phoneNumber" class="form-control" placeholder="Phone number *">
+    </div>
+ 
+    <div class="col-md-6 form-group">
+      <input type="text" id="pincode" class="form-control" placeholder="Pincode *">
+    </div>
+ 
+    <div class="col-md-6 form-group">
+      <select id="dialCode" class="form-control">
+        <option value="+91">India (+91)</option>
+      </select>
+    </div>
+ 
+    <!-- 🔥 ADDRESS FIELDS (NO EXTRA WRAPPER) -->
+    <div class="col-md-12 form-group">
+      <input type="text" id="streetAddress" class="form-control" placeholder="Address line 01 *">
+    </div>
+ 
+    <div class="col-md-12 form-group">
+      <input type="text" id="landmark" class="form-control" placeholder="Landmark">
+    </div>
+  </div>
+ 
+</div>
+ 
+ 
+            <!-- RADIO ADDRESS -->
+            <div class="col-12 form-group" id="radioAddressSection">
+              <div id="savedAddresses"></div>
+            </div>
+ 
+            <!-- BUTTON AREA -->
+            <div class="col-12 form-group" id="addressActionArea">
+ 
+              <button type="button"
+                      class="checkout_btn"
+                      id="addNewAddressBtn"
+                       onclick="openAddressModal()">
+                    + ADD NEW ADDRESS
+              </button>
+ 
+              <button type="button"
+                      class="checkout_btn"
+                      id="saveAddressBtn"
+                      onclick="saveAddress()"
+                      style="display:none;">
+                SAVE ADDRESS
+              </button>
+ 
+            </div>
+ 
+          </form>
+        </div>
+      </div>
+ 
+      <!-- RIGHT SIDE (NEVER TOUCHED) -->
+      <div class="col-lg-4">
+        <div class="order_box">
+          <h3>Your Order</h3>
+          <ul class="order_list" id="orderItems"></ul>
+          <ul class="order_total">
+            <li><span>Subtotal</span><span id="orderSubtotal">₹0</span></li>
+           <li><span>Shipping</span><span id="shippingCharge">₹0</span></li>
+            <li class="total"><span>Total</span><span id="orderTotal">₹0</span></li>
+          </ul>
+          <div class="payment_box">
+ <label class="payment-option">
+    <input type="radio" name="paymentMethod" value="COD" checked>
+    <span class="payment-text">Cash on Delivery</span>
+  </label>
+ 
+   <label class="payment-option">
+    <input type="radio" name="paymentMethod" value="ONLINE">
+    <span class="payment-text">
+      Card Payment
+    </span>
+  </label>
+ 
+  <div id="cardForm" style="display:none; margin-top:15px;">
+ 
+  <input type="text" id="cardNumber" class="form-control mb-2" placeholder="Card Number" maxlength="16">
+ 
+  <input type="text" id="cardExpiry" class="form-control mb-2" placeholder="MM/YY" maxlength="5">
+ 
+  <input type="password" id="cardCvv" class="form-control mb-2" placeholder="CVV" maxlength="3">
+ 
+</div>
+ 
+</div>
+ 
+<button type="button" class="checkout_btn" onclick="placeOrder()">
+  PROCEED TO PAY
+</button>
+ 
+        </div>
+      </div>
+ 
+    </div>
+  </div>
+</section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="{% static 'js/API.js' %}"></script>
+<script>
+function getCSRFToken() {
+  return document.querySelector('[name=csrfmiddlewaretoken]').value;
+}
+ 
+/* ================= LOAD USER ================= */
+function loadUserForCheckout() {
+  const token = localStorage.getItem("token");
+  if (!token) return;
+ 
+  $.ajax({
+    url: "{% url 'verify_user_token' %}",
+    type: "GET",
+    headers: { token },
+    success: function (data) {
+      $("#fullName").val(data.userName || "");
+      $("#phoneNumber").val(data.phone || "");
+      $("#dialCode").val(data.dialCode || "+91");
+    }
+  });
+}
+ 
+/* ================= LOAD ADDRESSES ================= */
+function loadAddresses() {
+  $.ajax({
+    url: "{% url 'getAllAddressesOfUser' %}",
+    type: "GET",
+    headers: { token: localStorage.getItem("token") },
+ 
+    success: function (res) {
+ 
+      console.log("ADDRESS RESPONSE:", res);
+ 
+      // ✅ FIRST TIME USER (NO ADDRESS)
+      if (!res.data || res.data.length === 0) {
+ 
+        // hide radio section
+        $("#radioAddressSection").hide();
+        $("#savedAddresses").html("");
+ 
+        // 🔥 SHOW FORM DIRECTLY
+        $("#allTextBoxes").show();
+        $("#saveAddressBtn").show();
+ 
+        return; // ⛔ stop here
+      }
+ 
+      // ✅ USER HAS SAVED ADDRESSES
+      let html = "<h5>Select Delivery Address</h5>";
+ 
+      res.data.forEach((addr, i) => {
+        html += `
+  <label style="
+    display:flex;
+    align-items:flex-start;
+    gap:12px;
+    border:1px solid #ddd;
+    padding:14px;
+    margin-bottom:12px;
+    cursor:pointer;
+  ">
+    <input type="radio"
+           name="addressId"
+           value="${addr.addressId}"
+           ${i === 0 ? "checked" : ""}
+           style="margin-top:4px"
+           onclick="selectSavedAddress()">
+ 
+    <div>
+      <strong>${addr.fullName}</strong><br>
+      ${addr.streetAddress}, ${addr.landmark}<br>
+      ${addr.pincode}<br>
+      ${addr.dialCode} ${addr.phoneNumber}
+    </div>
+  </label>
+`;
+ 
+      });
+ 
+      $("#savedAddresses").html(html);
+ 
+      $("#radioAddressSection").show();
+      $("#allTextBoxes").hide();
+      $("#saveAddressBtn").hide();
+    }
+  });
+}
+ 
+ 
+/* ================= RADIO SELECT ================= */
+function selectSavedAddress() {
+  $("#allTextBoxes").hide();
+  $("#saveAddressBtn").hide();
+  $("#radioAddressSection").show();
+}
+ 
+/* ================= ADD NEW ADDRESS ================= */
+function showAddressForm() {
+  $("input[name='addressId']").prop("checked", false);
+  $("#radioAddressSection").hide();
+  $("#allTextBoxes").show();
+  $("#saveAddressBtn").show();
+}
+ 
+ 
+ 
+/* ================= SAVE ADDRESS ================= */
+function saveAddress() {
+  const token = localStorage.getItem("token");
+  if (!token) return alert("Login required");
+ 
+  const pincode = $("#pincode").val();
+  if (!pincode || pincode.length !== 6) {
+    alert("Enter valid 6-digit pincode");
+    return;
+  }
+ 
+  $.ajax({
+    url: "{% url 'addAddress' %}",
+    type: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-CSRFToken": getCSRFToken(),
+      token: token
+    },
+    data: JSON.stringify({
+      fullName: $("#fullName").val(),
+      phoneNumber: $("#phoneNumber").val(),
+      dialCode: $("#dialCode").val(),
+      Pincode: pincode,
+      streetAddress: $("#streetAddress").val(),
+      Landmark: $("#landmark").val(),
+      isActive: true
+    }),
+    success: function () {
+      alert("Address saved");
+      loadAddresses();
+    },
+    error: function (err) {
+      alert(err.responseJSON?.message || "Error saving address");
+    }
+  });
+}
+ 
+/* ================= CART ================= */
+const DELIVERY_CHARGE = 100;
+ 
+function loadOrderSummary() {
+  $.ajax({
+    url: "{% url 'getAllCart' %}",
+    type: "GET",
+    headers: { token: localStorage.getItem("token") },
+ 
+    success: function (res) {
+ 
+      let subtotal = 0;
+      $("#orderItems").html("");
+ 
+      // ✅ HANDLE EMPTY SAFELY
+      if (!res.items || res.items.length === 0) {
+        $("#orderItems").html("<li>Your cart is empty</li>");
+        $("#orderSubtotal").text("₹0");
+        $("#shippingCharge").text("₹0");
+        $("#orderTotal").text("₹0");
+        return;
+      }
+ 
+      res.items.forEach(item => {
+        let itemTotal = parseFloat(item.totalPrice);
+        subtotal += itemTotal;
+ 
+        $("#orderItems").append(`
+          <li>
+            <span>${item.productName} × ${item.quantity}</span>
+            <span>₹${itemTotal}</span>
+          </li>
+        `);
+      });
+ 
+      let grandTotal = subtotal + DELIVERY_CHARGE;
+ 
+      $("#orderSubtotal").text(`₹${subtotal}`);
+      $("#shippingCharge").text(`₹${DELIVERY_CHARGE}`);
+      $("#orderTotal").text(`₹${grandTotal}`);
+    },
+ 
+    // 🔥🔥 ADD THIS ERROR BLOCK
+    error: function (err) {
+ 
+      // ❌ STOP "Cart is empty" popup
+      if (err.responseJSON?.message === "Cart is empty") {
+ 
+        $("#orderItems").html("<li>Your cart is empty</li>");
+        $("#orderSubtotal").text("₹0");
+        $("#shippingCharge").text("₹0");
+        $("#orderTotal").text("₹0");
+ 
+        return;
+      }
+ 
+      console.log("Cart error:", err);
+    }
+  });
+}
+ 
+/* ================= INIT ================= */
+$(document).ready(function () {
+  $("#allTextBoxes").hide();
+  $("#saveAddressBtn").hide();
+  loadUserForCheckout();
+  loadAddresses();
+  loadOrderSummary();
+});
+function placeOrder(){
+ 
+  let addressId = $("input[name='addressId']:checked").val();
+ 
+  if (!addressId) {
+    alert("Please select an address first");
+    return;
+  }
+ 
+  let paymentMethod = $("input[name='paymentMethod']:checked").val();
+ 
+  let paymentChoice = 0;
+  let cardNumber = "";
+  let cardCvv = "";
+  let cardExpiry = "";
+ 
+  if(paymentMethod === "ONLINE"){
+      paymentChoice = 1;
+ 
+      cardNumber = $("#cardNumber").val().trim();
+      cardCvv = $("#cardCvv").val().trim();
+      cardExpiry = $("#cardExpiry").val().trim();
+ 
+      if(!cardNumber || !cardCvv || !cardExpiry){
+          alert("Please fill card details");
+          return;
+      }
+  }
+ 
+  $.ajax({
+    url: "/createOrder/",
+    type: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-CSRFToken": getCSRFToken(),
+      token: localStorage.getItem("token")
+    },
+ 
+    data: JSON.stringify({
+      addressId: addressId,
+      paymentChoice: paymentChoice,
+      cardNumber: cardNumber,
+      cardCvv: cardCvv,
+      cardExpiry: cardExpiry
+    }),
+ 
+    success: function () {
+      showOrderSuccessPopup();
+    },
+ 
+    error: function (err) {
+      alert(err.responseJSON?.message || "Order failed");
+    }
+  });
+}
+ 
+function goHome() {
+  window.location.href = "{% url 'homePage' %}";
+}
+let redirectTimer;
+ 
+function showOrderSuccessPopup() {
+  document.getElementById("orderSuccessPopup").style.display = "flex";
+ 
+  redirectTimer = setTimeout(() => {
+    window.location.href = "{% url 'orderpage' %}";
+  }, 5000);
+}
+ 
+function goHome() {
+  clearTimeout(redirectTimer);
+  window.location.href = "{% url 'homePage' %}";
+}
+function openAddressModal() {
+  const modal = document.getElementById("addressModal");
+  modal.style.display = "flex";   // ✅ CENTER WORKS
+}
+ 
+// close when click outside
+$(document).on("click", "#addressModal", function(e) {
+  if ($(e.target).is("#addressModal")) {
+    $("#addressModal").fadeOut();
+  }
+});
+function saveAddressFromModal() {
+ 
+  const token = localStorage.getItem("token");
+ 
+  const pincode = $("#modalPincode").val();
+ 
+  if (!pincode || pincode.length !== 6) {
+    alert("Enter valid pincode");
+    return;
+  }
+ 
+  $.ajax({
+    url: "{% url 'addAddress' %}",
+    type: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-CSRFToken": getCSRFToken(),
+      token: token
+    },
+    data: JSON.stringify({
+      fullName: $("#modalFullName").val(),
+      phoneNumber: $("#modalPhoneNumber").val(),
+      dialCode: $("#modalDialCode").val(),
+      Pincode: pincode,
+      streetAddress: $("#modalStreetAddress").val(),
+      Landmark: $("#modalLandmark").val(),
+      isActive: true
+    }),
+ 
+    success: function () {
+ 
+      // ✅ CLOSE POPUP
+      $("#addressModal").fadeOut();
+ 
+      // ✅ CLEAR FORM
+      $("#addressModal input").val("");
+ 
+      // ✅ RELOAD ADDRESS LIST
+      loadAddresses();
+    }
+  });
+}
+function closeAddressModal() {
+  document.getElementById("addressModal").style.display = "none";
+}
+$(document).on("change",'input[name="paymentMethod"]',function(){
+ 
+    let method = $(this).val();
+ 
+    if(method === "ONLINE"){
+        $("#cardForm").show();
+    }else{
+        $("#cardForm").hide();
+    }
+ 
+});
+ 
+</script>
+<!-- ADDRESS MODAL -->
+<div id="addressModal" class="custom-modal">
+  <div class="custom-modal-content">
+ 
+    <!-- ❌ CLOSE BUTTON -->
+    <span class="modal-close" onclick="closeAddressModal()">&times;</span>
+ 
+    <!-- 🔥 TITLE -->
+    <h3 class="modal-title">Billing Details</h3>
+ 
+    <div class="row">
+ 
+      <div class="col-md-6 form-group">
+        <input type="text" id="modalFullName" class="form-control" placeholder="Full name *">
+      </div>
+ 
+      <div class="col-md-6 form-group">
+        <input type="text" id="modalPhoneNumber" class="form-control" placeholder="Phone number *">
+      </div>
+ 
+      <div class="col-md-6 form-group">
+        <input type="text" id="modalPincode" class="form-control" placeholder="Pincode *">
+      </div>
+ 
+      <div class="col-md-6 form-group">
+        <select id="modalDialCode" class="form-control">
+          <option value="+91">India (+91)</option>
+        </select>
+      </div>
+ 
+      <div class="col-md-12 form-group">
+        <input type="text" id="modalStreetAddress" class="form-control" placeholder="Address line 01 *">
+      </div>
+ 
+      <div class="col-md-12 form-group">
+        <input type="text" id="modalLandmark" class="form-control" placeholder="Landmark">
+      </div>
+ 
+    </div>
+ 
+    <button class="checkout_btn w-100" onclick="saveAddressFromModal()">
+      SAVE ADDRESS
+    </button>
+ 
+  </div>
+</div>
+<div id="orderSuccessPopup">
+  <div class="order-success-box">
+    <div class="success-icon">✔</div>
+ 
+    <h2>Order Successful</h2>
+    <p>Your order has been placed successfully</p>
+ 
+    <!-- ✅ NEW BUTTON -->
+    <button class="continue-btn" onclick="goHome()">
+      Continue Shopping
+    </button>
+  </div>
+</div>
+ 
+{% endblock %}
+ 
+ 

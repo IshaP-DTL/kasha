@@ -1,0 +1,296 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div id="alert-container"
+     style="position:fixed; bottom:20px; right:20px; z-index:9999; width:320px;">
+</div>
+<link rel="stylesheet" href="{% static 'css/wishlist.css' %}">
+ 
+<div class="container m-t-50 m-b-50">
+ 
+    <h3 class="mtext-111 p-b-20">
+        My Wishlist <span id="wishlistCount">(0)</span>
+    </h3>
+ 
+    <div class="row" id="wishlistContainer">
+        <!-- Wishlist cards injected by JS -->
+    </div>
+ 
+</div>
+ 
+ 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="{% static 'js/API.js' %}"></script>
+ 
+<script>
+ 
+let cartProductIds = [];
+ 
+function loadCartProducts(callback) {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+ 
+    $.ajax({
+        url: "/getAllCart",
+        type: "GET",
+        headers: { "token": token },
+        success: function (res) {
+            cartProductIds = res.items.map(i => i.productId);
+            if (callback) callback();
+        }
+    });
+}
+ 
+function getCSRFToken() {
+    let cookieValue = null;
+    const name = "csrftoken";
+ 
+    if (document.cookie && document.cookie !== "") {
+        const cookies = document.cookie.split(";");
+ 
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+ 
+            if (cookie.startsWith(name + "=")) {
+                cookieValue = decodeURIComponent(
+                    cookie.substring(name.length + 1)
+                );
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+ 
+function getAuthHeaders() {
+    const token = localStorage.getItem("token");
+ 
+    if (!token) {
+        window.location.href = "/login";
+        return null;
+    }
+ 
+    return {
+        "token": token,
+        "Content-Type": "application/json",
+         "X-CSRFToken": getCSRFToken()
+       
+    };
+}
+ 
+ 
+function loadWishlist() {
+ 
+    const headers = getAuthHeaders();
+    if (!headers) return;
+ 
+    loadCartProducts(function () {
+ 
+        $.ajax({
+            url: "/getWishlistByUserId",
+            type: "GET",
+            headers: headers,
+            success: function (res) {
+ 
+                let html = "";
+ 
+                // 🔹 UI-only filter
+               const visibleWishlist = res.data;
+ 
+                $("#wishlistCount").text(`(${visibleWishlist.length})`);
+ 
+                if (visibleWishlist.length === 0) {
+                    html = `<div class="wishlist-empty">
+                        Your wishlist is empty ❤️
+                    </div>`;
+                } else {
+                    visibleWishlist.forEach(item => {
+                        html += `
+                        <div class="col-sm-6 col-md-4 col-lg-3 p-b-35">
+                            <div class="wishlist-card">
+ 
+    <button class="wishlist-remove js-remove-wishlist"
+    data-id="${item.productId}"
+    data-color="${item.colorId}">
+        ✕
+    </button>
+ 
+    <a href="/product-detail?productID=${item.productId}">
+ 
+                               
+                                <a href="/product-detail?productID=${item.productId}">
+                                    <img src="${item.image}" class="wishlist-img">
+                                </a>
+ 
+                                <div class="wishlist-info">
+                                    <div class="wishlist-name">${item.productName}</div>
+                                    <div class="wishlist-price">₹${item.price}</div>
+ 
+                                    <button class="wishlist-btn js-move-to-bag"
+                                        data-id="${item.productId}"
+                                        data-color="${item.colorId}">
+                                        Move to Bag
+                                    </button>
+                                </div>
+                            </div>
+                        </div>`;
+                    });
+                }
+ 
+                $("#wishlistContainer").html(html);
+            }
+        });
+ 
+    });
+}
+ 
+ 
+$(document).ready(function () {
+    loadWishlist();
+});
+// 🔥 FIX: reload wishlist when coming back from another page
+window.addEventListener("pageshow", function () {
+    loadWishlist();
+});
+$(document).on("click",".js-move-to-bag",function(){
+ 
+const productId=$(this).data("id");
+const colorId=$(this).data("color");
+const token=localStorage.getItem("token");
+ 
+if(!token){
+window.location.href="/login";
+return;
+}
+ 
+$.ajax({
+url:"/getSingleProduct",
+type:"GET",
+data:{
+    productID:productId,
+    colorId: colorId
+},
+ 
+success:function(res){
+ 
+const sizes=res.data.sizes;
+ 
+const availableSize = sizes.find(
+    s => s.stock_quantity > 0
+);
+ 
+if(!availableSize){
+showAlert("Out of stock ❌","danger");
+return;
+}
+ 
+$.ajax({
+url:"/addToCart",
+type:"POST",
+contentType:"application/json",
+headers:{
+token:token,
+"X-CSRFToken":getCSRFToken()
+},
+ 
+data:JSON.stringify({
+productId:productId,
+quantity:1,
+sizeId: availableSize.size_id,
+colorId:colorId
+}),
+ 
+success:function(){
+ 
+showAlert("Product added to cart 🛒","success");
+ 
+/* remove from wishlist */
+$.ajax({
+url:"/addOrRemoveWishlist",
+type:"POST",
+contentType:"application/json",
+headers:{
+token:token,
+"X-CSRFToken":getCSRFToken()
+},
+data:JSON.stringify({
+    productId:productId,
+    colorId:colorId
+}),
+ 
+success:function(){
+ 
+/* refresh wishlist UI */
+loadWishlist();
+ 
+/* update cart counter */
+updateCartCount();
+ 
+}
+});
+ 
+}
+ 
+});
+ 
+}
+ 
+});
+ 
+});
+$(document).on("click",".js-remove-wishlist",function(){
+ 
+    const productId=$(this).data("id");
+    let colorId=$(this).data("color");
+ 
+    if(!colorId || colorId === "undefined"){
+        colorId = null;
+    }
+ 
+    $.ajax({
+        url:"/addOrRemoveWishlist",
+        type:"POST",
+        contentType:"application/json",
+        headers:{
+            token:localStorage.getItem("token"),
+            "X-CSRFToken":getCSRFToken()
+        },
+        data:JSON.stringify({
+            productId:productId,
+            colorId:colorId
+        }),
+ 
+        success:function(){
+ 
+            showAlert("Removed from wishlist ❌","danger");
+ 
+            loadWishlist(); // refresh wishlist
+        }
+    });
+ 
+});
+function showAlert(message, type="success") {
+ 
+    const alertHTML = `
+    <div class="alert alert-${type} alert-dismissible fade show shadow" role="alert">
+        ${message}
+        <button type="button" class="close" data-dismiss="alert">
+            <span>&times;</span>
+        </button>
+    </div>
+    `;
+ 
+    $("#alert-container").append(alertHTML);
+ 
+    setTimeout(function(){
+        $("#alert-container .alert").first().alert('close');
+    },3000);
+}
+</script>
+ 
+ 
+{% endblock %}
+ 
+ 
+ 
+ 

@@ -1,0 +1,1953 @@
+[
+{
+  "model": "app.country",
+  "pk": 1,
+  "fields": {
+    "country_name": "INDIA",
+    "country_code": "IN",
+    "dial_code": "+91",
+    "created_at": "2026-03-02T13:20:24.195Z",
+    "updated_at": "2026-03-02T13:20:24.198Z"
+  }
+},
+{
+  "model": "app.country",
+  "pk": 2,
+  "fields": {
+    "country_name": "USA",
+    "country_code": "USA",
+    "dial_code": "+1",
+    "created_at": "2026-03-02T13:22:12.650Z",
+    "updated_at": "2026-03-02T13:22:12.650Z"
+  }
+},
+{
+  "model": "app.state",
+  "pk": 1,
+  "fields": {
+    "state_name": "GUJRAT",
+    "country_id": 1,
+    "created_at": "2026-03-02T13:20:44.008Z",
+    "updated_at": "2026-03-02T13:20:44.008Z"
+  }
+},
+{
+  "model": "app.state",
+  "pk": 2,
+  "fields": {
+    "state_name": "RAJASTHAN",
+    "country_id": 1,
+    "created_at": "2026-03-02T13:21:29.859Z",
+    "updated_at": "2026-03-02T13:21:29.859Z"
+  }
+},
+{
+  "model": "app.city",
+  "pk": 1,
+  "fields": {
+    "city_name": "AHMEDABAD",
+    "state_id": 1,
+    "created_at": "2026-03-02T13:22:57.311Z",
+    "updated_at": "2026-03-02T13:22:57.311Z"
+  }
+},
+{
+  "model": "app.city",
+  "pk": 2,
+  "fields": {
+    "city_name": "SURAT",
+    "state_id": 1,
+    "created_at": "2026-03-02T13:23:28.373Z",
+    "updated_at": "2026-03-02T13:23:28.373Z"
+  }
+},
+{
+  "model": "app.city",
+  "pk": 3,
+  "fields": {
+    "city_name": "JAIPUR",
+    "state_id": 2,
+    "created_at": "2026-03-02T13:23:50.191Z",
+    "updated_at": "2026-03-02T13:23:50.191Z"
+  }
+},
+{
+  "model": "app.city",
+  "pk": 4,
+  "fields": {
+    "city_name": "UDAIPUR",
+    "state_id": 2,
+    "created_at": "2026-03-02T13:24:03.729Z",
+    "updated_at": "2026-03-02T13:24:03.729Z"
+  }
+},
+{
+  "model": "app.pincode",
+  "pk": 1,
+  "fields": {
+    "pincode": 382330,
+    "city_id": 1,
+    "created_at": "2026-03-02T13:24:49.662Z",
+    "updated_at": "2026-03-02T13:24:49.662Z"
+  }
+},
+{
+  "model": "app.pincode",
+  "pk": 2,
+  "fields": {
+    "pincode": 313001,
+    "city_id": 4,
+    "created_at": "2026-03-02T13:25:23.971Z",
+    "updated_at": "2026-03-02T13:25:23.971Z"
+  }
+},
+{
+  "model": "app.pincode",
+  "pk": 3,
+  "fields": {
+    "pincode": 312001,
+    "city_id": 3,
+    "created_at": "2026-03-02T13:25:41.528Z",
+    "updated_at": "2026-03-02T13:25:41.528Z"
+  }
+},
+{
+  "model": "app.pincode",
+  "pk": 4,
+  "fields": {
+    "pincode": 395001,
+    "city_id": 2,
+    "created_at": "2026-03-02T13:26:08.327Z",
+    "updated_at": "2026-03-02T13:26:08.327Z"
+  }
+},
+{
+  "model": "app.pincode",
+  "pk": 5,
+  "fields": {
+    "pincode": 382350,
+    "city_id": 1,
+    "created_at": "2026-03-02T13:26:26.884Z",
+    "updated_at": "2026-03-02T13:26:26.884Z"
+  }
+},
+{
+  "model": "app.user",
+  "pk": 1,
+  "fields": {
+    "username": "Isha",
+    "country_code": 1,
+    "phone_number": 98986645454,
+    "email": "ishap5622@gmail.com",
+    "password": "pbkdf2_sha256$1000000$xvje0S9LalFMJ2BLrs3QHm$cHzqgQJjaM2iFDmfLD+K2oDBKXHTJDUchHnXBFfXWeU=",
+    "otp": null,
+    "created_at": "2026-03-02T13:28:19.963Z",
+    "updated_at": "2026-03-02T13:28:19.963Z"
+  }
+},
+{
+  "model": "app.user",
+  "pk": 2,
+  "fields": {
+    "username": "Krupa",
+    "country_code": 1,
+    "phone_number": 9090988080,
+    "email": "krupa18102003@gmail.com",
+    "password": "pbkdf2_sha256$1000000$cdTOVqxZoeTdGRaFPo1HQ7$du33HlPNKuQuLvam54khb6Dr9Wn6VXcyO+MzP8uy01c=",
+    "otp": null,
+    "created_at": "2026-03-02T13:30:37.921Z",
+    "updated_at": "2026-03-02T13:30:37.921Z"
+  }
+},
+{
+  "model": "app.profile",
+  "pk": 1,
+  "fields": {
+    "user_id": 1,
+    "first_name": "ishaaa",
+    "last_name": "patelll",
+    "gender": 0,
+    "DOB": "2004-08-06",
+    "profile_picture": "profile/eip1_3mh2SsG.jpg",
+    "is_active": false,
+    "is_deleted": true,
+    "created_at": "2026-03-03T11:20:27.518Z",
+    "updated_at": "2026-03-03T11:30:48.394Z"
+  }
+},
+{
+  "model": "app.profile",
+  "pk": 2,
+  "fields": {
+    "user_id": 1,
+    "first_name": "patel isha",
+    "last_name": "ashvinbhai",
+    "gender": 0,
+    "DOB": "2004-08-06",
+    "profile_picture": "profile/eip1_SOTN381.jpg",
+    "is_active": true,
+    "is_deleted": false,
+    "created_at": "2026-03-03T11:32:21.709Z",
+    "updated_at": "2026-03-03T11:33:54.287Z"
+  }
+},
+{
+  "model": "app.size",
+  "pk": 1,
+  "fields": {
+    "size_name": "XS",
+    "parent_size": null,
+    "created_at": "2026-03-02T13:37:16.346Z",
+    "updated_at": "2026-03-02T13:37:16.346Z"
+  }
+},
+{
+  "model": "app.size",
+  "pk": 2,
+  "fields": {
+    "size_name": "S",
+    "parent_size": null,
+    "created_at": "2026-03-02T13:37:23.035Z",
+    "updated_at": "2026-03-02T13:37:23.037Z"
+  }
+},
+{
+  "model": "app.size",
+  "pk": 3,
+  "fields": {
+    "size_name": "M",
+    "parent_size": null,
+    "created_at": "2026-03-02T13:37:27.697Z",
+    "updated_at": "2026-03-02T13:37:27.697Z"
+  }
+},
+{
+  "model": "app.size",
+  "pk": 4,
+  "fields": {
+    "size_name": "L",
+    "parent_size": null,
+    "created_at": "2026-03-02T13:37:32.611Z",
+    "updated_at": "2026-03-02T13:37:32.611Z"
+  }
+},
+{
+  "model": "app.size",
+  "pk": 5,
+  "fields": {
+    "size_name": "XL",
+    "parent_size": null,
+    "created_at": "2026-03-02T13:37:37.176Z",
+    "updated_at": "2026-03-02T13:37:37.176Z"
+  }
+},
+{
+  "model": "app.size",
+  "pk": 6,
+  "fields": {
+    "size_name": "XXL",
+    "parent_size": null,
+    "created_at": "2026-03-02T13:37:46.370Z",
+    "updated_at": "2026-03-02T13:37:46.370Z"
+  }
+},
+{
+  "model": "app.size",
+  "pk": 7,
+  "fields": {
+    "size_name": "24",
+    "parent_size": 1,
+    "created_at": "2026-03-03T06:59:42.023Z",
+    "updated_at": "2026-03-03T06:59:42.023Z"
+  }
+},
+{
+  "model": "app.size",
+  "pk": 8,
+  "fields": {
+    "size_name": "26",
+    "parent_size": 1,
+    "created_at": "2026-03-03T06:59:51.077Z",
+    "updated_at": "2026-03-03T06:59:51.077Z"
+  }
+},
+{
+  "model": "app.size",
+  "pk": 9,
+  "fields": {
+    "size_name": "28",
+    "parent_size": 2,
+    "created_at": "2026-03-03T06:59:58.511Z",
+    "updated_at": "2026-03-03T06:59:58.511Z"
+  }
+},
+{
+  "model": "app.category",
+  "pk": 1,
+  "fields": {
+    "category_name": "JEANS",
+    "parent_category": null,
+    "category_image": "media/category/category_jeans_iYJ6lz8.jpeg",
+    "is_active": true,
+    "created_at": "2026-03-02T13:33:57.993Z",
+    "updated_at": "2026-03-03T05:22:14.429Z"
+  }
+},
+{
+  "model": "app.category",
+  "pk": 2,
+  "fields": {
+    "category_name": "DRESS",
+    "parent_category": null,
+    "category_image": "media/category/bodycone1.jpg",
+    "is_active": true,
+    "created_at": "2026-03-02T13:34:43.220Z",
+    "updated_at": "2026-03-02T13:34:43.220Z"
+  }
+},
+{
+  "model": "app.category",
+  "pk": 3,
+  "fields": {
+    "category_name": "TOPS",
+    "parent_category": null,
+    "category_image": "media/category/ChatGPT_Image_Mar_3_2026_12_07_06_PM.png",
+    "is_active": true,
+    "created_at": "2026-03-03T04:49:27.918Z",
+    "updated_at": "2026-03-03T06:53:48.726Z"
+  }
+},
+{
+  "model": "app.category",
+  "pk": 4,
+  "fields": {
+    "category_name": "TROUSER",
+    "parent_category": null,
+    "category_image": "media/category/category_trouser_VPlZfjg.jpeg",
+    "is_active": true,
+    "created_at": "2026-03-03T04:49:49.134Z",
+    "updated_at": "2026-03-03T05:23:30.019Z"
+  }
+},
+{
+  "model": "app.category",
+  "pk": 5,
+  "fields": {
+    "category_name": "SHIRT",
+    "parent_category": null,
+    "category_image": "media/category/shirt4.jpg",
+    "is_active": true,
+    "created_at": "2026-03-03T04:50:14.444Z",
+    "updated_at": "2026-03-03T04:50:14.444Z"
+  }
+},
+{
+  "model": "app.product",
+  "pk": 1,
+  "fields": {
+    "product_name": "Ruby Ruffle Charm Top",
+    "short_description": "A stylish red top with soft ruffles and a comfortable fit. Perfect for casual and outing wear.",
+    "description": "This Red Ruffle Peplum Top is simple, classy, and easy to style. It comes in a bright red color that looks bold and attractive. The top has beautiful ruffle details on the shoulders and front, which give it a soft and feminine look.\r\n\r\nIt has a V-neck design and long balloon sleeves. The bottom has a slight flare (peplum style), which makes it comfortable and flattering to wear.\r\n\r\nYou can wear this top with jeans, pants, or skirts. It is perfect for college, brunch, shopping, or small functions.",
+    "category": 3,
+    "price": "1299.00",
+    "is_active": true,
+    "color": "RED",
+    "created_at": "2026-03-03T05:38:54.424Z",
+    "updated_at": "2026-03-03T05:38:54.424Z",
+    "size": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ]
+  }
+},
+{
+  "model": "app.product",
+  "pk": 2,
+  "fields": {
+    "product_name": "Classic Red Knit Sweater",
+    "short_description": "A soft red knit sweater with a simple and elegant look. Perfect for winter and casual wear.",
+    "description": "This Classic Red Knit Sweater is warm, stylish, and comfortable. It comes in a beautiful deep red color that looks rich and classy. The sweater has a simple round neck and a neat knit pattern that gives it a clean and smart look.\r\n\r\nIt has full sleeves and a fitted shape that looks good with jeans, trousers, or skirts. The soft fabric keeps you warm and cozy during cold days.\r\n\r\nYou can wear this sweater for college, office, outings, or dinner dates. It is easy to style and always looks elegant.",
+    "category": 3,
+    "price": "1599.00",
+    "is_active": true,
+    "color": "RED",
+    "created_at": "2026-03-03T05:42:17.370Z",
+    "updated_at": "2026-03-03T05:42:17.370Z",
+    "size": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ]
+  }
+},
+{
+  "model": "app.product",
+  "pk": 3,
+  "fields": {
+    "product_name": "Denim Button Vest Top",
+    "short_description": "A stylish denim vest with front buttons. Perfect for a smart and trendy look.",
+    "description": "This Denim Button Vest Top gives a classy and modern look. It comes in a beautiful blue denim fabric with stylish front buttons. The fitted shape gives a smart and flattering look.\r\n\r\nYou can wear it over a white shirt, top, or even a dress. It is perfect for college, office, casual outings, or photoshoots. The denim fabric is strong, comfortable, and easy to style.\r\n\r\nPair it with jeans or trousers for a clean and confident outfit.",
+    "category": 3,
+    "price": "899.00",
+    "is_active": true,
+    "color": "DARK BLUE",
+    "created_at": "2026-03-03T05:50:49.539Z",
+    "updated_at": "2026-03-03T05:50:49.539Z",
+    "size": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  }
+},
+{
+  "model": "app.product",
+  "pk": 4,
+  "fields": {
+    "product_name": "White Side Knot Top",
+    "short_description": "A simple white top with a stylish side knot. Perfect for daily wear and casual outings.",
+    "description": "This White Side Knot Top is simple, modern, and easy to wear. It comes in a clean white color that looks fresh and classy. The special side knot design gives it a stylish and unique touch.\r\n\r\nIt has a round neck and short sleeves, which makes it comfortable for everyday use. The soft fabric feels light and breathable, perfect for warm weather.\r\n\r\nYou can pair it with jeans, trousers, or skirts for a smart and casual look. It is perfect for college, shopping, travel, or daily wear.",
+    "category": 3,
+    "price": "499.00",
+    "is_active": true,
+    "color": "WHITE",
+    "created_at": "2026-03-03T05:57:29.714Z",
+    "updated_at": "2026-03-03T05:57:29.714Z",
+    "size": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ]
+  }
+},
+{
+  "model": "app.product",
+  "pk": 5,
+  "fields": {
+    "product_name": "Pink Button Sleeveless Top",
+    "short_description": "A stylish pink sleeveless top with front buttons. Perfect for a smart and elegant look.",
+    "description": "This Pink Button Sleeveless Top is simple, classy, and modern. It comes in a soft pink color that looks fresh and beautiful. The front button design gives it a neat and smart look.\r\n\r\nIt is sleeveless and has a fitted shape that looks flattering on the body. The fabric feels comfortable and light, making it perfect for daily wear or outings.\r\n\r\nYou can pair it with jeans, trousers, or skirts for a clean and stylish outfit. It is great for office wear, brunch, meetings, or casual events.",
+    "category": 3,
+    "price": "899.00",
+    "is_active": true,
+    "color": "PINK",
+    "created_at": "2026-03-03T06:00:36.156Z",
+    "updated_at": "2026-03-03T06:00:36.156Z",
+    "size": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ]
+  }
+},
+{
+  "model": "app.product",
+  "pk": 6,
+  "fields": {
+    "product_name": "Blue Sleeveless Flare Dress",
+    "short_description": "A stylish blue sleeveless dress with a fitted waist and flared skirt. Perfect for a classy and elegant look.",
+    "description": "This Blue Sleeveless Flare Dress is simple, elegant, and beautiful. It comes in a rich blue color with a neat textured design.\r\n\r\nThe dress is sleeveless and has a round neck, giving it a clean and classy look. It is fitted at the waist and flares out at the bottom, which makes it look flattering and stylish.\r\n\r\nThe fabric feels comfortable and is perfect for parties, dinners, office events, or special occasions.",
+    "category": 2,
+    "price": "999.00",
+    "is_active": true,
+    "color": "BLUE",
+    "created_at": "2026-03-03T06:17:07.425Z",
+    "updated_at": "2026-03-03T06:17:07.425Z",
+    "size": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ]
+  }
+},
+{
+  "model": "app.product",
+  "pk": 7,
+  "fields": {
+    "product_name": "Black Floral Midi Dress",
+    "short_description": "A beautiful black midi dress with small floral print. Perfect for a soft and elegant look.",
+    "description": "This Black Floral Midi Dress is stylish and elegant. It comes in a black color with small, pretty floral prints all over.\r\n\r\nIt has a V-neck design and short puff sleeves, which give it a soft and feminine look. The dress is fitted at the top and flows nicely at the bottom. The midi length makes it perfect for many occasions.\r\n\r\nThe fabric feels light and comfortable, making it easy to wear for long hours.\r\n\r\nYou can wear this dress for brunch, dinner, office events, or small parties.",
+    "category": 2,
+    "price": "1599.00",
+    "is_active": true,
+    "color": "BLACK",
+    "created_at": "2026-03-03T06:18:35.794Z",
+    "updated_at": "2026-03-03T06:18:35.794Z",
+    "size": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ]
+  }
+},
+{
+  "model": "app.product",
+  "pk": 8,
+  "fields": {
+    "product_name": "Halter Neck Dress",
+    "short_description": "Elegant pastel yellow halter neck dress with a flowy design. Perfect for summer outings and special occasions.",
+    "description": "This Pastel Yellow Halter Neck Dress gives a soft and classy look. The light yellow color feels fresh, bright, and perfect for sunny days.\r\n\r\nThe halter neck design adds a stylish and feminine touch. The fitted upper part enhances the body shape, while the flowy skirt creates a graceful and elegant movement.\r\n\r\nThe fabric looks light and comfortable, making it suitable for brunch dates, vacations, parties, or evening outings. It gives a chic and effortless vibe.\r\nThe dress is sleeveless and has a high round neck, giving it a smart look. It fits closely to the body and highlights your shape in a beautiful way. The soft stretch fabric makes it comfortable to wear.\r\n\r\nThis dress is perfect for parties, dinners, birthdays, or special events.",
+    "category": 2,
+    "price": "5000.00",
+    "is_active": true,
+    "color": "YELLOW",
+    "created_at": "2026-03-03T06:19:23.190Z",
+    "updated_at": "2026-03-03T10:24:47.705Z",
+    "size": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ]
+  }
+},
+{
+  "model": "app.product",
+  "pk": 9,
+  "fields": {
+    "product_name": "Red Fit & Flare Mini Dress",
+    "short_description": "A beautiful red mini dress with a fitted top and flared skirt. Perfect for parties and special nights.",
+    "description": "This Red Fit & Flare Mini Dress is stylish and elegant. It comes in a rich red color that looks bold and attractive.\r\n\r\nThe dress has short sleeves and a fitted upper part that shapes the body nicely. The skirt flares out at the bottom, giving it a cute and classy look.\r\n\r\nThe fabric feels comfortable and soft, making it easy to wear for parties, birthdays, dinners, or special events.",
+    "category": 2,
+    "price": "2599.00",
+    "is_active": true,
+    "color": "RED",
+    "created_at": "2026-03-03T06:40:18.983Z",
+    "updated_at": "2026-03-03T06:40:18.983Z",
+    "size": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ]
+  }
+},
+{
+  "model": "app.product",
+  "pk": 10,
+  "fields": {
+    "product_name": "Olive Green Elegant Maxi Dress",
+    "short_description": "A stylish olive green maxi dress with a fitted shape. Perfect for parties and special occasions.",
+    "description": "This Olive Green Elegant Maxi Dress is classy and beautiful. It comes in a rich olive green color that looks soft and elegant.\r\n\r\nThe dress has a fitted design that shapes the body nicely and gives a slim look. It is long and flows down beautifully, giving a graceful style. The neckline and sleeveless design add a modern and stylish touch.\r\n\r\nThe fabric looks smooth and comfortable, perfect for evening parties, weddings, dinners, or special events.",
+    "category": 2,
+    "price": "3299.00",
+    "is_active": true,
+    "color": "GREEN",
+    "created_at": "2026-03-03T06:41:16.186Z",
+    "updated_at": "2026-03-03T06:41:16.186Z",
+    "size": [
+      1,
+      2,
+      3,
+      4
+    ]
+  }
+},
+{
+  "model": "app.product",
+  "pk": 11,
+  "fields": {
+    "product_name": "Lavender Flare Mini Dress",
+    "short_description": "A cute lavender mini dress with a fitted top and flared skirt. Perfect for a soft and pretty look.",
+    "description": "This Lavender Flare Mini Dress is sweet and stylish. It comes in a soft lavender color that looks fresh and beautiful.\r\n\r\nThe dress has a fitted upper part that shapes the body nicely and a flared skirt that gives it a cute and girly look. The sleeveless design makes it perfect for warm weather.\r\n\r\nThe fabric feels light and comfortable, making it great for day outings, brunch, birthdays, or small parties.",
+    "category": 2,
+    "price": "3000.00",
+    "is_active": true,
+    "color": "PURPLE",
+    "created_at": "2026-03-03T06:43:16.869Z",
+    "updated_at": "2026-03-03T06:43:16.869Z",
+    "size": [
+      1,
+      2,
+      3
+    ]
+  }
+},
+{
+  "model": "app.product",
+  "pk": 12,
+  "fields": {
+    "product_name": "Wine Velvet Party Dress",
+    "short_description": "A rich wine velvet dress with stylish strap design. Perfect for parties and special events.",
+    "description": "This Wine Velvet Party Dress looks elegant and luxurious. It comes in a deep wine red color that looks bold and beautiful.\r\n\r\nThe dress has thin straps and a fitted shape that highlights the body nicely. The soft velvet fabric gives it a rich and classy feel. The shiny detail at the waist adds a special and stylish touch.\r\n\r\nIt is perfect for evening parties, weddings, dinners, or special occasions.",
+    "category": 2,
+    "price": "4000.00",
+    "is_active": true,
+    "color": "RED",
+    "created_at": "2026-03-03T06:43:58.802Z",
+    "updated_at": "2026-03-03T06:43:58.802Z",
+    "size": [
+      1,
+      2,
+      3,
+      4
+    ]
+  }
+},
+{
+  "model": "app.product",
+  "pk": 13,
+  "fields": {
+    "product_name": "Baggy Wide Leg Jeans",
+    "short_description": "Trendy light blue baggy jeans with a wide leg fit. Perfect for a cool and comfortable look",
+    "description": "These Light Blue Baggy Wide Leg Jeans are stylish and comfortable. They come in a soft light blue denim color that looks fresh and modern.\r\n\r\nThe high-waist design gives a flattering shape, and the wide leg style makes them loose and easy to wear. They are perfect for daily use and give a relaxed, trendy vibe.\r\n\r\nYou can pair these jeans with crop tops, t-shirts, or hoodies for college, shopping, travel, or casual outings.",
+    "category": 1,
+    "price": "999.00",
+    "is_active": true,
+    "color": "LIGHT BLUE",
+    "created_at": "2026-03-03T07:00:19.830Z",
+    "updated_at": "2026-03-03T07:00:19.830Z",
+    "size": [
+      7,
+      8,
+      9
+    ]
+  }
+},
+{
+  "model": "app.product",
+  "pk": 14,
+  "fields": {
+    "product_name": "Elegant White Flare Maxi Dress",
+    "short_description": "A beautiful white maxi dress with a fitted top and flared skirt. Perfect for a classy and graceful look.",
+    "description": "This Elegant White Flare Maxi Dress is simple and graceful. It comes in a soft white color that looks clean and elegant.\r\n\r\nThe dress has short sleeves and a fitted upper part that shapes the body nicely. The long flared skirt flows beautifully, giving a royal and classy look.\r\n\r\nThe fabric feels smooth and comfortable, making it perfect for special occasions. You can wear it for weddings, parties, photoshoots, or evening events.",
+    "category": 2,
+    "price": "3200.00",
+    "is_active": true,
+    "color": "WHITE",
+    "created_at": "2026-03-03T07:02:32.083Z",
+    "updated_at": "2026-03-03T07:02:32.083Z",
+    "size": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ]
+  }
+},
+{
+  "model": "app.product",
+  "pk": 15,
+  "fields": {
+    "product_name": "Classic Red Evening Maxi Dress",
+    "short_description": "A beautiful red maxi dress with a simple and elegant design. Perfect for parties and special occasions.",
+    "description": "This Classic Red Evening Maxi Dress looks bold and elegant. It comes in a rich red color that stands out and looks very classy.\r\n\r\nThe dress has a fitted top and a long flowing skirt that gives a graceful look. The sleeveless design and simple neckline make it modern and stylish.\r\n\r\nThe fabric feels smooth and comfortable, perfect for evening parties, weddings, dinners, or special events.",
+    "category": 2,
+    "price": "2000.00",
+    "is_active": true,
+    "color": "RED",
+    "created_at": "2026-03-03T07:03:59.696Z",
+    "updated_at": "2026-03-03T07:03:59.696Z",
+    "size": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ]
+  }
+},
+{
+  "model": "app.product",
+  "pk": 16,
+  "fields": {
+    "product_name": "High-Waist Wide Leg Jeans",
+    "short_description": "These High-Waist Wide Leg Jeans are stylish and comfortable. They come in a classic blue denim color that matches with any top.  The high-waist design gives a smart and flattering look. The wide leg style makes them modern and comfortable to wear all day.",
+    "description": "These High-Waist Wide Leg Jeans are stylish and comfortable. They come in a classic blue denim color that matches with any top.\r\n\r\nThe high-waist design gives a smart and flattering look. The wide leg style makes them modern and comfortable to wear all day.\r\n\r\nYou can pair these jeans with shirts, tops, or blazers for college, office, shopping, or casual outings.",
+    "category": 1,
+    "price": "1200.00",
+    "is_active": true,
+    "color": "DARK BLUE",
+    "created_at": "2026-03-03T07:05:20.077Z",
+    "updated_at": "2026-03-03T07:05:20.077Z",
+    "size": [
+      7,
+      8,
+      9
+    ]
+  }
+},
+{
+  "model": "app.product",
+  "pk": 17,
+  "fields": {
+    "product_name": "Elegant Cream Layered Maxi Dress",
+    "short_description": "A beautiful cream maxi dress with a fitted top and layered flared skirt. Perfect for weddings and special occasions.",
+    "description": "This Elegant Cream Layered Maxi Dress looks soft and graceful. It comes in a light cream color that looks classy and elegant.\r\n\r\nThe dress has a fitted upper part with wide straps and a simple neckline. The long skirt flows beautifully and has soft layered details that give it a royal look.\r\n\r\nThe fabric feels smooth and light, making it comfortable to wear for long hours. It is perfect for weddings, receptions, engagement parties, or formal events.",
+    "category": 2,
+    "price": "1500.00",
+    "is_active": true,
+    "color": "WHITE",
+    "created_at": "2026-03-03T07:06:26.646Z",
+    "updated_at": "2026-03-03T07:06:26.646Z",
+    "size": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ]
+  }
+},
+{
+  "model": "app.product",
+  "pk": 18,
+  "fields": {
+    "product_name": "Wide Leg Cargo Jeans",
+    "short_description": "Stylish black wide leg cargo jeans with side pockets. Perfect for a cool and trendy look.",
+    "description": "These Black Wide Leg Cargo Jeans are modern and comfortable. They come in a classic black color that matches with any top.\r\n\r\nThe wide leg design gives a relaxed and trendy look. The side cargo pockets add a stylish and useful detail.\r\n\r\nThe fabric feels strong and comfortable for all-day wear. You can wear these jeans for college, travel, shopping, or casual outings.\r\n\r\nPair them with crop tops, t-shirts, or tank tops for a cool street-style outfit.",
+    "category": 1,
+    "price": "2000.00",
+    "is_active": true,
+    "color": "BLACK",
+    "created_at": "2026-03-03T07:17:36.311Z",
+    "updated_at": "2026-03-03T07:17:36.311Z",
+    "size": [
+      7,
+      8,
+      9
+    ]
+  }
+},
+{
+  "model": "app.product",
+  "pk": 19,
+  "fields": {
+    "product_name": "Baggy Wide Leg Jeans",
+    "short_description": "Trendy Dark Blue baggy jeans with a wide leg fit. Perfect for a cool and comfortable look.",
+    "description": "These  Dark Blue Baggy Wide Leg Jeans are stylish and comfortable. They come in a soft light blue denim color that looks fresh and modern.\r\n\r\nThe high-waist design gives a flattering shape, and the wide leg style makes them loose and easy to wear. They are perfect for daily use and give a relaxed, trendy vibe.\r\n\r\nYou can pair these jeans with crop tops, t-shirts, or hoodies for college, shopping, travel, or casual outings.",
+    "category": 1,
+    "price": "1400.00",
+    "is_active": true,
+    "color": "DARK BLUE",
+    "created_at": "2026-03-03T07:28:07.049Z",
+    "updated_at": "2026-03-03T07:28:07.049Z",
+    "size": [
+      7,
+      8,
+      9
+    ]
+  }
+},
+{
+  "model": "app.product",
+  "pk": 20,
+  "fields": {
+    "product_name": "Slit Cut Bell Bottom Jeans",
+    "short_description": "Stylish black bell bottom jeans with front slit cut from the knee. Perfect for a bold and modern look.",
+    "description": "These Black Slit Cut Bell Bottom Jeans are trendy and eye-catching. They come in a classic black color that matches with any top.\r\n\r\nThe high-waist design gives a flattering fit, and the bell bottom style adds a stylish flare. The slit cut from the knee area gives a modern and fashionable touch.\r\n\r\nThe fabric feels comfortable and strong for all-day wear. These jeans are perfect for parties, dinners, office styling, or casual outings.",
+    "category": 1,
+    "price": "1100.00",
+    "is_active": true,
+    "color": "BLACK",
+    "created_at": "2026-03-03T09:36:51.007Z",
+    "updated_at": "2026-03-03T09:36:51.007Z",
+    "size": [
+      7,
+      8,
+      9
+    ]
+  }
+},
+{
+  "model": "app.product",
+  "pk": 21,
+  "fields": {
+    "product_name": "Striped Formal Shirt",
+    "short_description": "Elegant sky blue striped shirt with a slim fit design. Perfect for office and smart casual wear.",
+    "description": "This Sky Blue Striped Formal Shirt is stylish and classy. It comes in a soft sky blue color with thin white vertical stripes that give a clean and professional look.\r\n\r\nThe shirt has a slim fit design that shapes the body beautifully. It features a classic collar, front buttons, and full sleeves with neat cuffs. The fabric looks smooth and comfortable, making it perfect for long office hours or meetings.\r\n\r\nYou can wear this shirt with black pants, white trousers, or jeans for a smart and confident style. It is perfect for office, interviews, business meetings, or formal outings.",
+    "category": 5,
+    "price": "699.00",
+    "is_active": true,
+    "color": "BLUE",
+    "created_at": "2026-03-03T09:49:00.869Z",
+    "updated_at": "2026-03-03T09:49:00.869Z",
+    "size": [
+      1,
+      2,
+      3,
+      4
+    ]
+  }
+},
+{
+  "model": "app.product",
+  "pk": 22,
+  "fields": {
+    "product_name": "Cargo  Jeans",
+    "short_description": "Stylish wide leg cargo jeans with multiple side pockets. Perfect for a trendy and comfortable everyday look.",
+    "description": "These Cargo Jeans are modern and fashionable. They feature a relaxed wide leg fit that gives a comfortable and stylish appearance.\r\n\r\nThe design includes multiple cargo pockets on the sides, adding both utility and a cool street-style vibe. The high-waist fit enhances the body shape while keeping the look trendy and confident.\r\n\r\nMade from durable denim fabric, these jeans are suitable for daily wear, outings, travel, or casual events. They are easy to style with crop tops, fitted tops, or oversized t-shirts.",
+    "category": 1,
+    "price": "1400.00",
+    "is_active": true,
+    "color": "DARK BLUE",
+    "created_at": "2026-03-03T09:55:31.964Z",
+    "updated_at": "2026-03-03T09:55:31.964Z",
+    "size": [
+      7,
+      8,
+      9
+    ]
+  }
+},
+{
+  "model": "app.product",
+  "pk": 23,
+  "fields": {
+    "product_name": "Casual Shirt",
+    "short_description": "Classic blue and white striped shirt with a relaxed fit. Perfect for smart casual and summer styling.",
+    "description": "This Blue & White Striped Casual Shirt gives a fresh and classy look. The soft blue and white vertical stripes create a clean and elegant style.\r\n\r\nThe shirt features a comfortable relaxed fit with a classic collar and front buttons. It is easy to wear for daily outings, office, vacations, or brunch dates.\r\n\r\nThe lightweight fabric makes it suitable for warm weather and all-day comfort. You can tuck it in for a polished look or wear it loose for a relaxed vibe.",
+    "category": 5,
+    "price": "799.00",
+    "is_active": true,
+    "color": "WHITE AND BLUE",
+    "created_at": "2026-03-03T10:05:19.164Z",
+    "updated_at": "2026-03-03T10:05:19.164Z",
+    "size": [
+      1,
+      2,
+      3,
+      4
+    ]
+  }
+},
+{
+  "model": "app.product",
+  "pk": 24,
+  "fields": {
+    "product_name": "Satin Shirt",
+    "short_description": "Elegant navy blue satin shirt with a smooth and glossy finish. Perfect for formal and classy looks.",
+    "description": "This Navy Blue Satin Shirt is stylish and sophisticated. It comes in a deep navy blue color with a soft satin shine that gives a premium and elegant feel.\r\n\r\nThe shirt features a classic collar and a clean button-down front design. The smooth satin fabric feels soft on the skin and gives a polished, graceful look.\r\n\r\nIt is perfect for office wear, formal meetings, dinner dates, or special occasions. The rich color and glossy texture make it stand out while still looking classy.",
+    "category": 5,
+    "price": "899.00",
+    "is_active": true,
+    "color": "BLUE",
+    "created_at": "2026-03-03T10:06:03.093Z",
+    "updated_at": "2026-03-03T10:06:03.093Z",
+    "size": [
+      1,
+      2,
+      3,
+      4
+    ]
+  }
+},
+{
+  "model": "app.product",
+  "pk": 25,
+  "fields": {
+    "product_name": "Striped Shirt",
+    "short_description": "Soft light pink striped shirt with a slim fit design. Perfect for a fresh and elegant everyday look.",
+    "description": "This Light Pink Striped Shirt gives a soft and feminine look. The light pink color with thin vertical stripes makes it look stylish and classy.\r\n\r\nThe shirt features a slim fit design that shapes the body nicely. It has a classic collar, front buttons, and full sleeves for a clean and polished appearance.\r\n\r\nThe fabric feels light and comfortable, making it suitable for office wear, casual outings, or brunch dates. You can tuck it in for a smart look or wear it loose for a relaxed style.",
+    "category": 5,
+    "price": "899.00",
+    "is_active": true,
+    "color": "PINK",
+    "created_at": "2026-03-03T10:07:07.952Z",
+    "updated_at": "2026-03-03T10:07:07.952Z",
+    "size": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ]
+  }
+},
+{
+  "model": "app.product",
+  "pk": 26,
+  "fields": {
+    "product_name": "Striped Slim Fit Shirt",
+    "short_description": "Stylish red striped slim fit shirt with a modern look. Perfect for smart casual and trendy outfits.",
+    "description": "This Red Striped Slim Fit Shirt gives a bold and confident look. The rich red color with thin white vertical stripes creates a classy and eye-catching style.\r\n\r\nThe slim fit design shapes the body beautifully and gives a polished appearance. It features a classic collar, front button closure, and full sleeves for a clean and stylish finish.\r\n\r\nThe fabric feels comfortable and suitable for daily wear. You can wear it for casual outings, office, shopping, or dinner dates.",
+    "category": 5,
+    "price": "999.00",
+    "is_active": true,
+    "color": "RED",
+    "created_at": "2026-03-03T10:08:13.198Z",
+    "updated_at": "2026-03-03T10:08:13.198Z",
+    "size": [
+      1,
+      2,
+      3,
+      4
+    ]
+  }
+},
+{
+  "model": "app.product",
+  "pk": 27,
+  "fields": {
+    "product_name": "Striped Wrap Top",
+    "short_description": "Elegant brown striped wrap-style top with a slim fit design. Perfect for classy and smart outfits.",
+    "description": "This Brown Striped Wrap Top gives a rich and stylish look. The deep brown color with thin vertical stripes creates a premium and elegant feel.\r\n\r\nThe wrap-style design with a V-neck adds a modern and flattering shape. The slim fit enhances the body beautifully, while the long sleeves give a polished and sophisticated touch.\r\n\r\nThe fabric looks smooth and comfortable, making it suitable for office wear, meetings, dinner outings, or formal events.",
+    "category": 3,
+    "price": "1199.00",
+    "is_active": true,
+    "color": "BROWN",
+    "created_at": "2026-03-03T10:09:52.071Z",
+    "updated_at": "2026-03-03T10:09:52.071Z",
+    "size": [
+      1,
+      2,
+      3,
+      5
+    ]
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 1,
+  "fields": {
+    "images": "product/red2_wXi0cfQ.1.jpeg",
+    "product_id": 1,
+    "created_at": "2026-03-03T05:39:20.480Z",
+    "updated_at": "2026-03-03T05:39:20.480Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 2,
+  "fields": {
+    "images": "product/red2_NDlgfxO.0.jpeg",
+    "product_id": 1,
+    "created_at": "2026-03-03T05:39:32.464Z",
+    "updated_at": "2026-03-03T05:39:32.464Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 3,
+  "fields": {
+    "images": "product/red2_7UdbFar.jpeg",
+    "product_id": 1,
+    "created_at": "2026-03-03T05:39:44.859Z",
+    "updated_at": "2026-03-03T05:39:44.859Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 4,
+  "fields": {
+    "images": "product/red3_XX6cOct.jpeg",
+    "product_id": 2,
+    "created_at": "2026-03-03T05:42:33.049Z",
+    "updated_at": "2026-03-03T05:42:33.049Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 5,
+  "fields": {
+    "images": "product/red3_14NBeaf.0.jpeg",
+    "product_id": 2,
+    "created_at": "2026-03-03T05:42:45.314Z",
+    "updated_at": "2026-03-03T05:42:52.435Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 6,
+  "fields": {
+    "images": "product/red3_aKFPolq.1.jpeg",
+    "product_id": 2,
+    "created_at": "2026-03-03T05:43:01.673Z",
+    "updated_at": "2026-03-03T05:43:01.673Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 7,
+  "fields": {
+    "images": "product/download_11.jpeg",
+    "product_id": 3,
+    "created_at": "2026-03-03T05:51:05.396Z",
+    "updated_at": "2026-03-03T05:51:05.396Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 8,
+  "fields": {
+    "images": "product/download_12.jpeg",
+    "product_id": 3,
+    "created_at": "2026-03-03T05:51:15.266Z",
+    "updated_at": "2026-03-03T05:51:15.266Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 9,
+  "fields": {
+    "images": "product/western_cutiee_sunslap.jpeg",
+    "product_id": 3,
+    "created_at": "2026-03-03T05:51:24.221Z",
+    "updated_at": "2026-03-03T05:51:24.221Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 10,
+  "fields": {
+    "images": "product/white_top1.jpg",
+    "product_id": 4,
+    "created_at": "2026-03-03T05:58:17.338Z",
+    "updated_at": "2026-03-03T05:58:17.338Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 11,
+  "fields": {
+    "images": "product/white_top2.jpg",
+    "product_id": 4,
+    "created_at": "2026-03-03T05:58:43.936Z",
+    "updated_at": "2026-03-03T05:58:43.936Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 12,
+  "fields": {
+    "images": "product/white_top_3.jpg",
+    "product_id": 4,
+    "created_at": "2026-03-03T05:59:03.362Z",
+    "updated_at": "2026-03-03T05:59:03.362Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 13,
+  "fields": {
+    "images": "product/pink-button-up-waistcoat1_Binv0jl.jpg",
+    "product_id": 5,
+    "created_at": "2026-03-03T06:00:55.979Z",
+    "updated_at": "2026-03-03T06:00:55.979Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 14,
+  "fields": {
+    "images": "product/pink-button-up-waistcoat2_kwXKo8x.jpg",
+    "product_id": 5,
+    "created_at": "2026-03-03T06:01:11.872Z",
+    "updated_at": "2026-03-03T06:01:11.872Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 15,
+  "fields": {
+    "images": "product/pink-button-up-waistcoat3_AWwpnFI.jpg",
+    "product_id": 5,
+    "created_at": "2026-03-03T06:01:23.370Z",
+    "updated_at": "2026-03-03T06:01:23.370Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 16,
+  "fields": {
+    "images": "product/blue_dress1.jpg",
+    "product_id": 6,
+    "created_at": "2026-03-03T06:20:59.552Z",
+    "updated_at": "2026-03-03T06:20:59.552Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 17,
+  "fields": {
+    "images": "product/blue_dress2.jpg",
+    "product_id": 6,
+    "created_at": "2026-03-03T06:21:13.192Z",
+    "updated_at": "2026-03-03T06:21:13.192Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 18,
+  "fields": {
+    "images": "product/blue_dress3.jpg",
+    "product_id": 6,
+    "created_at": "2026-03-03T06:21:30.701Z",
+    "updated_at": "2026-03-03T06:21:30.701Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 19,
+  "fields": {
+    "images": "product/black_midi1.jpg",
+    "product_id": 7,
+    "created_at": "2026-03-03T06:21:53.476Z",
+    "updated_at": "2026-03-03T06:21:53.476Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 20,
+  "fields": {
+    "images": "product/black_midi_2.jpg",
+    "product_id": 7,
+    "created_at": "2026-03-03T06:22:09.713Z",
+    "updated_at": "2026-03-03T06:24:12.355Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 21,
+  "fields": {
+    "images": "product/black_midi_3.jpg",
+    "product_id": 7,
+    "created_at": "2026-03-03T06:22:23.468Z",
+    "updated_at": "2026-03-03T06:22:23.468Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 22,
+  "fields": {
+    "images": "product/image_22.jpeg",
+    "product_id": 8,
+    "created_at": "2026-03-03T06:22:48.347Z",
+    "updated_at": "2026-03-03T10:25:30.636Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 23,
+  "fields": {
+    "images": "product/image_23.jpeg",
+    "product_id": 8,
+    "created_at": "2026-03-03T06:22:59.277Z",
+    "updated_at": "2026-03-03T10:26:41.909Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 24,
+  "fields": {
+    "images": "product/image_24.jpeg",
+    "product_id": 8,
+    "created_at": "2026-03-03T06:23:12.285Z",
+    "updated_at": "2026-03-03T10:26:58.896Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 25,
+  "fields": {
+    "images": "product/outfit_inspo.jpg",
+    "product_id": 9,
+    "created_at": "2026-03-03T06:44:43.278Z",
+    "updated_at": "2026-03-03T06:46:32.460Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 26,
+  "fields": {
+    "images": "product/pinterest_elegant_coffee_explore_explorepage_page_art_nails_pink_fairy__BJz568w.jpg",
+    "product_id": 9,
+    "created_at": "2026-03-03T06:44:54.374Z",
+    "updated_at": "2026-03-03T06:46:23.144Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 27,
+  "fields": {
+    "images": "product/download_15_77QIRUp.jpg",
+    "product_id": 9,
+    "created_at": "2026-03-03T06:45:54.677Z",
+    "updated_at": "2026-03-03T06:45:54.678Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 28,
+  "fields": {
+    "images": "product/Soft_silent_luxury__elegance_that_floats_.jpg",
+    "product_id": 10,
+    "created_at": "2026-03-03T06:46:58.643Z",
+    "updated_at": "2026-03-03T06:46:58.643Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 29,
+  "fields": {
+    "images": "product/Amazon_Clothing_Finds_2025_1.jpg",
+    "product_id": 10,
+    "created_at": "2026-03-03T06:47:12.931Z",
+    "updated_at": "2026-03-03T06:47:12.931Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 30,
+  "fields": {
+    "images": "product/Amazon_Clothing_Finds_2025.jpg",
+    "product_id": 10,
+    "created_at": "2026-03-03T06:47:22.388Z",
+    "updated_at": "2026-03-03T06:47:22.388Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 31,
+  "fields": {
+    "images": "product/Aliya_Bhatt_Maroon_colour_Velvet_Gown.jpg",
+    "product_id": 12,
+    "created_at": "2026-03-03T06:47:53.382Z",
+    "updated_at": "2026-03-03T06:47:53.382Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 32,
+  "fields": {
+    "images": "product/download_10.jpg",
+    "product_id": 12,
+    "created_at": "2026-03-03T06:48:20.059Z",
+    "updated_at": "2026-03-03T06:48:20.059Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 33,
+  "fields": {
+    "images": "product/Hoorain_Shaikh.jpg",
+    "product_id": 12,
+    "created_at": "2026-03-03T06:48:33.217Z",
+    "updated_at": "2026-03-03T06:48:33.217Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 34,
+  "fields": {
+    "images": "product/annika_volkov.jpg",
+    "product_id": 11,
+    "created_at": "2026-03-03T06:48:55.644Z",
+    "updated_at": "2026-03-03T06:48:55.644Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 35,
+  "fields": {
+    "images": "product/.jpg",
+    "product_id": 11,
+    "created_at": "2026-03-03T06:49:14.019Z",
+    "updated_at": "2026-03-03T06:49:14.019Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 36,
+  "fields": {
+    "images": "product/download_16.jpg",
+    "product_id": 11,
+    "created_at": "2026-03-03T06:49:31.536Z",
+    "updated_at": "2026-03-03T06:49:31.536Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 37,
+  "fields": {
+    "images": "product/baggy1.png",
+    "product_id": 13,
+    "created_at": "2026-03-03T07:00:36.602Z",
+    "updated_at": "2026-03-03T07:00:36.602Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 38,
+  "fields": {
+    "images": "product/baggy2.png",
+    "product_id": 13,
+    "created_at": "2026-03-03T07:00:44.012Z",
+    "updated_at": "2026-03-03T07:00:44.012Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 39,
+  "fields": {
+    "images": "product/baggy3.png",
+    "product_id": 13,
+    "created_at": "2026-03-03T07:00:52.968Z",
+    "updated_at": "2026-03-03T07:00:52.968Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 40,
+  "fields": {
+    "images": "product/download_18.jpg",
+    "product_id": 16,
+    "created_at": "2026-03-03T07:07:33.772Z",
+    "updated_at": "2026-03-03T07:07:33.772Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 41,
+  "fields": {
+    "images": "product/Best_Straight-Leg_Jeans_for_Effortless_Style___Flattering_Classic__On-Trend_Denim.jpg",
+    "product_id": 16,
+    "created_at": "2026-03-03T07:07:44.021Z",
+    "updated_at": "2026-03-03T07:07:44.021Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 42,
+  "fields": {
+    "images": "product/download_17.jpg",
+    "product_id": 16,
+    "created_at": "2026-03-03T07:07:57.899Z",
+    "updated_at": "2026-03-03T07:07:57.899Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 43,
+  "fields": {
+    "images": "product/download_11.jpg",
+    "product_id": 17,
+    "created_at": "2026-03-03T07:08:09.329Z",
+    "updated_at": "2026-03-03T07:08:09.329Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 44,
+  "fields": {
+    "images": "product/queen_edited.jpg",
+    "product_id": 17,
+    "created_at": "2026-03-03T07:08:24.844Z",
+    "updated_at": "2026-03-03T07:08:24.844Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 45,
+  "fields": {
+    "images": "product/white.jpg",
+    "product_id": 17,
+    "created_at": "2026-03-03T07:09:46.794Z",
+    "updated_at": "2026-03-03T07:09:46.794Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 46,
+  "fields": {
+    "images": "product/RED1.jpg",
+    "product_id": 15,
+    "created_at": "2026-03-03T07:10:32.140Z",
+    "updated_at": "2026-03-03T07:10:38.159Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 47,
+  "fields": {
+    "images": "product/RED2.jpg",
+    "product_id": 15,
+    "created_at": "2026-03-03T07:10:47.740Z",
+    "updated_at": "2026-03-03T07:10:47.740Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 48,
+  "fields": {
+    "images": "product/RED3.jpg",
+    "product_id": 15,
+    "created_at": "2026-03-03T07:11:27.257Z",
+    "updated_at": "2026-03-03T07:11:27.257Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 49,
+  "fields": {
+    "images": "product/download_12.jpg",
+    "product_id": 14,
+    "created_at": "2026-03-03T07:12:05.475Z",
+    "updated_at": "2026-03-03T07:12:05.475Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 50,
+  "fields": {
+    "images": "product/download_13.jpg",
+    "product_id": 14,
+    "created_at": "2026-03-03T07:12:16.119Z",
+    "updated_at": "2026-03-03T07:12:16.119Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 51,
+  "fields": {
+    "images": "product/download_14.jpg",
+    "product_id": 14,
+    "created_at": "2026-03-03T07:12:26.592Z",
+    "updated_at": "2026-03-03T07:12:26.592Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 52,
+  "fields": {
+    "images": "product/image_2.png",
+    "product_id": 18,
+    "created_at": "2026-03-03T07:17:59.652Z",
+    "updated_at": "2026-03-03T07:17:59.652Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 53,
+  "fields": {
+    "images": "product/cargo1.png",
+    "product_id": 18,
+    "created_at": "2026-03-03T07:22:16.089Z",
+    "updated_at": "2026-03-03T07:22:16.089Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 54,
+  "fields": {
+    "images": "product/cargo_2.png",
+    "product_id": 18,
+    "created_at": "2026-03-03T07:22:29.339Z",
+    "updated_at": "2026-03-03T07:22:29.339Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 55,
+  "fields": {
+    "images": "product/baggy2.1.png",
+    "product_id": 19,
+    "created_at": "2026-03-03T07:28:19.993Z",
+    "updated_at": "2026-03-03T07:28:19.993Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 56,
+  "fields": {
+    "images": "product/baggy2.2.png",
+    "product_id": 19,
+    "created_at": "2026-03-03T07:28:38.619Z",
+    "updated_at": "2026-03-03T07:28:38.619Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 57,
+  "fields": {
+    "images": "product/baggy2.3.png",
+    "product_id": 19,
+    "created_at": "2026-03-03T07:28:49.403Z",
+    "updated_at": "2026-03-03T07:28:49.403Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 58,
+  "fields": {
+    "images": "product/ChatGPT_Image_Mar_3_2026_03_13_16_PM.png",
+    "product_id": 21,
+    "created_at": "2026-03-03T09:49:18.317Z",
+    "updated_at": "2026-03-03T09:49:18.317Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 59,
+  "fields": {
+    "images": "product/ChatGPT_Image_Mar_3_2026_03_13_37_PM.png",
+    "product_id": 21,
+    "created_at": "2026-03-03T09:49:27.266Z",
+    "updated_at": "2026-03-03T09:49:27.266Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 60,
+  "fields": {
+    "images": "product/ChatGPT_Image_Mar_3_2026_03_14_38_PM.png",
+    "product_id": 21,
+    "created_at": "2026-03-03T09:49:35.089Z",
+    "updated_at": "2026-03-03T09:49:35.089Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 62,
+  "fields": {
+    "images": "product/image_2.jpeg",
+    "product_id": 20,
+    "created_at": "2026-03-03T10:13:12.754Z",
+    "updated_at": "2026-03-03T10:13:12.754Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 63,
+  "fields": {
+    "images": "product/image_6.png",
+    "product_id": 20,
+    "created_at": "2026-03-03T10:14:11.584Z",
+    "updated_at": "2026-03-03T10:14:11.584Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 64,
+  "fields": {
+    "images": "product/image_7.png",
+    "product_id": 20,
+    "created_at": "2026-03-03T10:14:31.808Z",
+    "updated_at": "2026-03-03T10:14:31.808Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 65,
+  "fields": {
+    "images": "product/image_3.jpeg",
+    "product_id": 22,
+    "created_at": "2026-03-03T10:14:57.804Z",
+    "updated_at": "2026-03-03T10:14:57.804Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 66,
+  "fields": {
+    "images": "product/image_9.png",
+    "product_id": 22,
+    "created_at": "2026-03-03T10:15:15.421Z",
+    "updated_at": "2026-03-03T10:15:15.421Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 67,
+  "fields": {
+    "images": "product/image_8.png",
+    "product_id": 22,
+    "created_at": "2026-03-03T10:15:26.963Z",
+    "updated_at": "2026-03-03T10:15:26.963Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 68,
+  "fields": {
+    "images": "product/image_4.jpeg",
+    "product_id": 23,
+    "created_at": "2026-03-03T10:15:52.667Z",
+    "updated_at": "2026-03-03T10:15:52.667Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 69,
+  "fields": {
+    "images": "product/image_20.jpeg",
+    "product_id": 23,
+    "created_at": "2026-03-03T10:16:11.644Z",
+    "updated_at": "2026-03-03T10:16:11.644Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 70,
+  "fields": {
+    "images": "product/image_21.jpeg",
+    "product_id": 23,
+    "created_at": "2026-03-03T10:16:22.882Z",
+    "updated_at": "2026-03-03T10:16:22.882Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 71,
+  "fields": {
+    "images": "product/image_18.jpeg",
+    "product_id": 24,
+    "created_at": "2026-03-03T10:16:52.926Z",
+    "updated_at": "2026-03-03T10:16:52.926Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 72,
+  "fields": {
+    "images": "product/image_19.jpeg",
+    "product_id": 24,
+    "created_at": "2026-03-03T10:17:03.608Z",
+    "updated_at": "2026-03-03T10:17:03.608Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 73,
+  "fields": {
+    "images": "product/image_17.jpeg",
+    "product_id": 24,
+    "created_at": "2026-03-03T10:17:14.590Z",
+    "updated_at": "2026-03-03T10:17:14.590Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 74,
+  "fields": {
+    "images": "product/image_16.jpeg",
+    "product_id": 25,
+    "created_at": "2026-03-03T10:17:47.411Z",
+    "updated_at": "2026-03-03T10:17:47.411Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 75,
+  "fields": {
+    "images": "product/image_15.jpeg",
+    "product_id": 25,
+    "created_at": "2026-03-03T10:17:59.522Z",
+    "updated_at": "2026-03-03T10:17:59.522Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 76,
+  "fields": {
+    "images": "product/image_14.jpeg",
+    "product_id": 25,
+    "created_at": "2026-03-03T10:18:10.991Z",
+    "updated_at": "2026-03-03T10:18:10.991Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 77,
+  "fields": {
+    "images": "product/image_8.jpeg",
+    "product_id": 26,
+    "created_at": "2026-03-03T10:18:57.300Z",
+    "updated_at": "2026-03-03T10:18:57.300Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 78,
+  "fields": {
+    "images": "product/image_10.jpeg",
+    "product_id": 26,
+    "created_at": "2026-03-03T10:19:07.848Z",
+    "updated_at": "2026-03-03T10:19:07.848Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 79,
+  "fields": {
+    "images": "product/image_9.jpeg",
+    "product_id": 26,
+    "created_at": "2026-03-03T10:19:17.100Z",
+    "updated_at": "2026-03-03T10:19:17.100Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 80,
+  "fields": {
+    "images": "product/image_6.jpeg",
+    "product_id": 27,
+    "created_at": "2026-03-03T10:20:31.104Z",
+    "updated_at": "2026-03-03T10:20:31.104Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 81,
+  "fields": {
+    "images": "product/image_7.jpeg",
+    "product_id": 27,
+    "created_at": "2026-03-03T10:21:07.346Z",
+    "updated_at": "2026-03-03T10:21:07.346Z"
+  }
+},
+{
+  "model": "app.productimages",
+  "pk": 82,
+  "fields": {
+    "images": "product/image_5.jpeg",
+    "product_id": 27,
+    "created_at": "2026-03-03T10:21:25.492Z",
+    "updated_at": "2026-03-03T10:21:25.492Z"
+  }
+},
+{
+  "model": "app.address",
+  "pk": 1,
+  "fields": {
+    "street_address": "A/104 Ganesh Opera ",
+    "landmark": "nr.Sargam Vatika, Nikol,Ahmedabad",
+    "pincode": 5,
+    "user_id": 1,
+    "is_active": true,
+    "full_name": "isha patel",
+    "dial_code": "+91",
+    "phone_number": "98397056",
+    "created_at": "2026-03-03T10:44:13.379Z",
+    "updated_at": "2026-03-03T10:44:13.379Z"
+  }
+},
+{
+  "model": "app.tokens",
+  "pk": 1,
+  "fields": {
+    "user_id": 1,
+    "tokens": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3NzQyNTgxMTd9.TLYSzJIqUTDUng1jki7WF3uzRvhwTNtXzhYHzac6-ZU",
+    "exp_time": "2026-03-23T09:28:37.095Z",
+    "created_at": "2026-03-02T13:28:37.102Z",
+    "updated_at": "2026-03-02T13:28:37.102Z"
+  }
+},
+{
+  "model": "app.tokens",
+  "pk": 2,
+  "fields": {
+    "user_id": 1,
+    "tokens": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3NzQyNTgxMTd9.TLYSzJIqUTDUng1jki7WF3uzRvhwTNtXzhYHzac6-ZU",
+    "exp_time": "2026-03-23T09:28:37.095Z",
+    "created_at": "2026-03-02T13:28:37.102Z",
+    "updated_at": "2026-03-02T13:28:37.102Z"
+  }
+},
+{
+  "model": "app.tokens",
+  "pk": 3,
+  "fields": {
+    "user_id": 1,
+    "tokens": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3NzQyNTgxMTh9.YQY6FkXgTj0IXbur-ayngw38xphxqnDPWX7mIsdG3yU",
+    "exp_time": "2026-03-23T09:28:38.230Z",
+    "created_at": "2026-03-02T13:28:38.239Z",
+    "updated_at": "2026-03-02T13:28:38.239Z"
+  }
+},
+{
+  "model": "app.tokens",
+  "pk": 4,
+  "fields": {
+    "user_id": 2,
+    "tokens": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE3NzQyNTgyNDh9.vuwYAsaPFCFPDLDkK7JD9Of-TJ5vKAEZ7z5wQTuYf24",
+    "exp_time": "2026-03-23T09:30:48.776Z",
+    "created_at": "2026-03-02T13:30:48.787Z",
+    "updated_at": "2026-03-02T13:30:48.787Z"
+  }
+},
+{
+  "model": "app.cart",
+  "pk": 1,
+  "fields": {
+    "user_id": 1,
+    "grand_total": "1299.00",
+    "is_active": false,
+    "created_at": "2026-03-03T10:42:40.525Z",
+    "updated_at": "2026-03-03T10:44:18.030Z"
+  }
+},
+{
+  "model": "app.cart",
+  "pk": 2,
+  "fields": {
+    "user_id": 1,
+    "grand_total": "1299.00",
+    "is_active": false,
+    "created_at": "2026-03-03T12:33:55.502Z",
+    "updated_at": "2026-03-03T13:32:20.860Z"
+  }
+},
+{
+  "model": "app.cart",
+  "pk": 3,
+  "fields": {
+    "user_id": 1,
+    "grand_total": "5000.00",
+    "is_active": true,
+    "created_at": "2026-03-03T13:32:56.292Z",
+    "updated_at": "2026-03-03T13:32:56.342Z"
+  }
+},
+{
+  "model": "app.cartitems",
+  "pk": 7,
+  "fields": {
+    "cart_id": 3,
+    "product_id": 8,
+    "size": 2,
+    "price": "5000.00",
+    "total": "5000.00",
+    "quantity": 1,
+    "created_at": "2026-03-03T13:32:56.320Z",
+    "updated_at": "2026-03-03T13:32:56.320Z"
+  }
+},
+{
+  "model": "app.order",
+  "pk": 1,
+  "fields": {
+    "serial_no": null,
+    "cart_id": 1,
+    "user_id": 1,
+    "grand_total": "1399.00",
+    "status": 1,
+    "address_id": 1,
+    "payment_choices": 0,
+    "payment_status": 0,
+    "delivery_charges": "100.00",
+    "assigned_delivery_person": null,
+    "created_at": "2026-03-03T10:44:17.953Z",
+    "updated_at": "2026-03-03T10:44:17.953Z"
+  }
+},
+{
+  "model": "app.order",
+  "pk": 2,
+  "fields": {
+    "serial_no": null,
+    "cart_id": 2,
+    "user_id": 1,
+    "grand_total": "1399.00",
+    "status": 1,
+    "address_id": 1,
+    "payment_choices": 0,
+    "payment_status": 0,
+    "delivery_charges": "100.00",
+    "assigned_delivery_person": null,
+    "created_at": "2026-03-03T13:32:20.786Z",
+    "updated_at": "2026-03-03T13:32:20.786Z"
+  }
+},
+{
+  "model": "app.orderitems",
+  "pk": 1,
+  "fields": {
+    "product_id": 1,
+    "order_id": 1,
+    "quantity": 1,
+    "price": "1299.00",
+    "size": 2,
+    "created_at": "2026-03-03T10:44:17.969Z",
+    "updated_at": "2026-03-03T10:44:17.969Z"
+  }
+},
+{
+  "model": "app.orderitems",
+  "pk": 2,
+  "fields": {
+    "product_id": 1,
+    "order_id": 2,
+    "quantity": 1,
+    "price": "1299.00",
+    "size": 2,
+    "created_at": "2026-03-03T13:32:20.810Z",
+    "updated_at": "2026-03-03T13:32:20.810Z"
+  }
+},
+{
+  "model": "app.stock",
+  "pk": 1,
+  "fields": {
+    "product_id": 8,
+    "stock_quantity": 10,
+    "size_id": 1
+  }
+},
+{
+  "model": "app.stock",
+  "pk": 2,
+  "fields": {
+    "product_id": 8,
+    "stock_quantity": 12,
+    "size_id": 2
+  }
+},
+{
+  "model": "app.stock",
+  "pk": 3,
+  "fields": {
+    "product_id": 1,
+    "stock_quantity": 12,
+    "size_id": 1
+  }
+},
+{
+  "model": "app.stock",
+  "pk": 4,
+  "fields": {
+    "product_id": 1,
+    "stock_quantity": 1,
+    "size_id": 2
+  }
+},
+{
+  "model": "app.stock",
+  "pk": 5,
+  "fields": {
+    "product_id": 1,
+    "stock_quantity": 2,
+    "size_id": 3
+  }
+}
+]

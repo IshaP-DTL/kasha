@@ -1,0 +1,853 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div id="alert-container">
+
+</div>
+ 
+<link rel="stylesheet" href="{% static 'css/wishlist.css' %}">
+    <!-- Slider -->
+    <section class="section-slide">
+    <div class="wrap-slick1 rs2-slick1">
+        <div class="slick1" id="bannerContainer"></div>
+
+        <div class="wrap-slick1-dots p-lr-10"></div>
+
+    </div>
+</section>
+
+    <!-- Banner -->
+    <div class="sec-banner bg0 p-t-95 p-b-55">
+        <div class="container">
+            <div class="row justify-content-center align-items-center" id="categoryContainer">
+    </div>
+
+    <!-- Product -->
+    <section class="bg0 p-t-23 p-b-130">
+        <div class="container">
+            <div class="p-b-10">
+                <h3 class="ltext-103 cl5">
+                    Product Overview
+                </h3>
+            </div>
+
+
+            <div class="flex-w flex-sb-m p-b-52">
+                <div class="flex-w flex-l-m filter-tope-group m-tb-10" id="categoryFilter">
+                    <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1"data-id="">
+                        All Products
+                    </button>
+                    <button class="stext-106" data-id="1">Jeans</button>
+                    <button class="stext-106" data-id="2">Dress</button>
+                    <button class="stext-106" data-id="3">Top</button>
+                    <button class="stext-106" data-id="4">Trouser</button>
+                    <button class="stext-106" data-id="5">Shirt</button>
+                </div>
+
+
+
+
+                <!-- Filter -->
+                <div class="dis-none panel-filter w-full p-t-10">
+                    <div class="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm">
+                        <div class="filter-col1 p-r-15 p-b-27">
+                            <div class="mtext-102 cl2 p-b-15">
+                                Sort By
+                            </div>
+                            <ul>
+        <li class="p-b-6">
+            <a href="#" class="filter-link stext-106 trans-04" data-sort="new">
+                New Launch
+            </a>
+        </li>
+
+        <li class="p-b-6">
+            <a href="#" class="filter-link stext-106 trans-04" data-sort="price_low">
+                Price: Low to High
+            </a>
+        </li>
+
+        <li class="p-b-6">
+            <a href="#" class="filter-link stext-106 trans-04" data-sort="price_high">
+                Price: High to Low
+            </a>
+        </li>
+    </ul>
+                        </div>
+
+
+                        <div class="filter-col2 p-r-15 p-b-27">
+                            <div class="mtext-102 cl2 p-b-15">
+                                Price
+                            </div>
+                            <ul>
+        <li class="p-b-6">
+            <a href="#" class="filter-link stext-106 trans-04" data-start="" data-end="">
+                All
+            </a>
+        </li>
+
+        <li class="p-b-6">
+            <a href="#" class="filter-link stext-106 trans-04" data-start="0" data-end="500">
+                ₹0 - ₹500
+            </a>
+        </li>
+
+        <li class="p-b-6">
+            <a href="#" class="filter-link stext-106 trans-04" data-start="500" data-end="1000">
+                ₹500 - ₹1000
+            </a>
+        </li>
+
+        <li class="p-b-6">
+            <a href="#" class="filter-link stext-106 trans-04" data-start="1000" data-end="1500">
+                ₹1000 - ₹1500
+            </a>
+        </li>
+
+        <li class="p-b-6">
+            <a href="#" class="filter-link stext-106 trans-04" data-start="1500" data-end="2000">
+                ₹1500 - ₹2000
+            </a>
+        </li>
+
+        <li class="p-b-6">
+            <a href="#" class="filter-link stext-106 trans-04" data-start="2000" data-end="">
+                ₹2000+
+            </a>
+        </li>
+    </ul>
+                        </div>
+
+
+                        <div class="filter-col3 p-r-15 p-b-27">
+                            <div class="mtext-102 cl2 p-b-15">
+                                Color
+                            </div>
+
+
+                            <ul>
+                                <li class="p-b-6">
+                                    <span class="fs-15 lh-12 m-r-6" style="color: #222;">
+                                        <i class="zmdi zmdi-circle"></i>
+                                    </span>
+
+
+                                    <a href="#" class="filter-link stext-106 trans-04">
+                                        Black
+                                    </a>
+                                </li>
+
+
+                                <li class="p-b-6">
+                                    <span class="fs-15 lh-12 m-r-6" style="color: #4272d7;">
+                                        <i class="zmdi zmdi-circle"></i>
+                                    </span>
+
+
+                                    <a href="#" class="filter-link stext-106 trans-04 filter-link-active">
+                                        Blue
+                                    </a>
+                                </li>
+
+
+                                <li class="p-b-6">
+                                    <span class="fs-15 lh-12 m-r-6" style="color: #b3b3b3;">
+                                        <i class="zmdi zmdi-circle"></i>
+                                    </span>
+
+
+                                    <a href="#" class="filter-link stext-106 trans-04">
+                                        Grey
+                                    </a>
+                                </li>
+
+
+                                <li class="p-b-6">
+                                    <span class="fs-15 lh-12 m-r-6" style="color: #00ad5f;">
+                                        <i class="zmdi zmdi-circle"></i>
+                                    </span>
+
+
+                                    <a href="#" class="filter-link stext-106 trans-04">
+                                        Green
+                                    </a>
+                                </li>
+
+
+                                <li class="p-b-6">
+                                    <span class="fs-15 lh-12 m-r-6" style="color: #fa4251;">
+                                        <i class="zmdi zmdi-circle"></i>
+                                    </span>
+
+
+                                    <a href="#" class="filter-link stext-106 trans-04">
+                                        Red
+                                    </a>
+                                </li>
+
+
+                                <li class="p-b-6">
+                                    <span class="fs-15 lh-12 m-r-6" style="color: #aaa;">
+                                        <i class="zmdi zmdi-circle-o"></i>
+                                    </span>
+
+
+                                    <a href="#" class="filter-link stext-106 trans-04">
+                                        White
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+
+                        <div class="filter-col4 p-b-27">
+                            <div class="mtext-102 cl2 p-b-15">
+                                Tags
+                            </div>
+
+
+                            <div class="flex-w p-t-4 m-r--5">
+                                <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                                    Fashion
+                                </a>
+
+
+                                <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                                    Lifestyle
+                                </a>
+
+
+                                <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                                    Denim
+                                </a>
+
+
+                                <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                                    Streetstyle
+                                </a>
+
+
+                                <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                                    Crafts
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row isotope-grid" id="productContainer"></div>
+
+
+
+            <!-- Pagination -->
+            <div class="flex-c-m flex-w w-full p-t-38" id="paginationContainer"></div>
+        </div>
+    </section>
+
+
+
+
+    <!-- Back to top -->
+    <div class="btn-back-to-top" id="myBtn">
+        <span class="symbol-btn-back-to-top">
+            <i class="zmdi zmdi-chevron-up"></i>
+        </span>
+    </div>
+
+
+    <!-- Modal1 -->
+    <div class="wrap-modal1 js-modal1 p-t-60 p-b-20">
+        <div class="overlay-modal1 js-hide-modal1"></div>
+
+
+        <div class="container">
+            <div class="bg0 p-t-60 p-b-30 p-lr-15-lg how-pos3-parent">
+                <button class="how-pos3 hov3 trans-04 js-hide-modal1">
+                    <img src="{% static "images/icons/icon-close.png" %}" alt="CLOSE">
+                </button>
+
+
+                <div class="row">
+                    <div class="col-md-6 col-lg-7 p-b-30">
+                        <div class="p-l-25 p-r-30 p-lr-0-lg">
+                            <div class="wrap-slick3 flex-sb flex-w">
+                                <div class="wrap-slick3-dots"></div>
+                                <div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
+
+
+                                <div class="slick3 gallery-lb">
+                                    <div class="item-slick3" data-thumb="{% static "images/product-detail-01.jpg" %}}">
+                                        <div class="wrap-pic-w pos-relative">
+                                            <img src="{% static "images/product-detail-01.jpg" %}" alt="IMG-PRODUCT">
+
+
+                                            <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="{% static "images/product-detail-01.jpg" %}">
+                                                <i class="fa fa-expand"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="item-slick3" data-thumb="{% static "images/product-detail-02.jpg" %}">
+                                        <div class="wrap-pic-w pos-relative">
+                                            <img src="{% static "images/product-detail-02.jpg" %}" alt="IMG-PRODUCT">
+
+
+                                            <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="static/images/product-detail-02.jpg">
+                                                <i class="fa fa-expand"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="item-slick3" data-thumb="images/product-detail-03.jpg">
+                                        <div class="wrap-pic-w pos-relative">
+                                            <img src="{% static "images/product-detail-03.jpg" %}" alt="IMG-PRODUCT">
+
+
+                                            <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="{% static "images/product-detail-03.jpg" %}">
+                                                <i class="fa fa-expand"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   
+                    <div class="col-md-6 col-lg-5 p-b-30">
+                        <div class="p-r-50 p-t-5 p-lr-0-lg">
+                            <h4 class="mtext-105 cl2 js-name-detail p-b-14">
+                                Lightweight Jacket
+                            </h4>
+
+
+                            <span class="mtext-106 cl2">
+                                $58.79
+                            </span>
+
+
+                            <p class="stext-102 cl3 p-t-23">
+                                Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat.
+                            </p>
+                           
+                            <!--  -->
+                            <div class="p-t-33">
+                                <div class="flex-w flex-r-m p-b-10">
+                                    <div class="size-203 flex-c-m respon6">
+                                        Size
+                                    </div>
+
+
+                                    <div class="size-204 respon6-next">
+                                        <div class="rs1-select2 bor8 bg0">
+                                            <select class="js-select2" name="time">
+                                                <option>Choose an option</option>
+                                                <option>Size S</option>
+                                                <option>Size M</option>
+                                                <option>Size L</option>
+                                                <option>Size XL</option>
+                                            </select>
+                                            <div class="dropDownSelect2"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="flex-w flex-r-m p-b-10">
+                                    <div class="size-203 flex-c-m respon6">
+                                        Color
+                                    </div>
+
+
+                                    <div class="size-204 respon6-next">
+                                        <div class="rs1-select2 bor8 bg0">
+                                            <select class="js-select2" name="time">
+                                                <option>Choose an option</option>
+                                                <option>Red</option>
+                                                <option>Blue</option>
+                                                <option>White</option>
+                                                <option>Grey</option>
+                                            </select>
+                                            <div class="dropDownSelect2"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="flex-w flex-r-m p-b-10">
+                                    <div class="size-204 flex-w flex-m respon6-next">
+                                        <div class="wrap-num-product flex-w m-r-20 m-tb-10">
+                                            <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
+                                                <i class="fs-16 zmdi zmdi-minus"></i>
+                                            </div>
+
+
+                                            <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="1">
+
+
+                                            <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
+                                                <i class="fs-16 zmdi zmdi-plus"></i>
+                                            </div>
+                                        </div>
+
+
+                                        <button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+                                            Add to cart
+                                        </button>
+                                    </div>
+                                </div>  
+                            </div>
+
+
+                            <!--  -->
+                            <div class="flex-w flex-m p-l-100 p-t-40 respon7">
+                                <div class="flex-m bor9 p-r-10 m-r-11">
+                                    <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Add to Wishlist">
+                                        <i class="zmdi zmdi-favorite-outline"></i>
+                                    </a>
+                                </div>
+
+
+                                <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Facebook">
+                                    <i class="fa fa-facebook"></i>
+                                </a>
+
+
+                                <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Twitter">
+                                    <i class="fa fa-twitter"></i>
+                                </a>
+
+
+                                <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Google Plus">
+                                    <i class="fa fa-google-plus"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="{% static 'vendor/imagesloaded/imagesloaded.pkgd.min.js' %}"></script>
+<script src="{% static 'vendor/isotope/isotope.pkgd.min.js' %}"></script>
+<script src="{% static 'js/API.js' %}"></script>
+
+
+<script>
+
+let currentPage = 1;
+let limit = 8;
+
+let filters = {
+    categoryId: null,
+    startRange: null,
+    endRange: null,
+    sort: null,
+    color: null
+};
+filters.categoryId = getCategoryFromURL();
+function getCSRFToken() {
+    let cookieValue = null;
+    const name = "csrftoken";
+
+    if (document.cookie && document.cookie !== "") {
+        const cookies = document.cookie.split(";");
+
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+
+            if (cookie.startsWith(name + "=")) {
+                cookieValue = decodeURIComponent(
+                    cookie.substring(name.length + 1)
+                );
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+
+function isLoggedIn() {
+    return localStorage.getItem("token") !== null;
+}
+
+
+function getCategoryFromURL() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get("categoryId");
+}
+
+function loadCategories() {
+    $.ajax({
+        url: "{% url 'getAllCategory' %}",
+        type: "GET",
+        success: function (res) {
+
+
+            let bannerHtml = "";
+            res.data.forEach(cat => {
+                bannerHtml += `
+                <div class="col-md-4 p-b-30">
+                    <div class="block1 wrap-pic-w">
+                        <img src="${cat.categoryImage}">
+                        <a href="{% url 'Product' %}?categoryId=${cat.categoryId}"
+                           class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03">
+                            <div class="block1-txt-child1 flex-col-l">
+                                <span class="block1-name ltext-102 p-b-8">
+                                    ${cat.categoryName}
+                                </span>
+                            </div>
+                            <div class="block1-txt-child2 p-b-4">
+                                <div class="block1-link stext-101 cl0">
+                                    Shop Now
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>`;
+            });
+            $("#categoryContainer").html(bannerHtml);
+
+            let filterHtml = `
+                <button class="stext-106 how-active1" data-id="">
+                    All Products
+                </button>`;
+
+            res.data.forEach(cat => {
+                filterHtml += `
+                <button class="stext-106" data-id="${cat.categoryId}">
+                    ${cat.categoryName}
+                </button>`;
+            });
+
+            $("#categoryFilter").html(filterHtml);
+        }
+    });
+}
+
+function loadProducts(page = 1) {
+    filters.page = page;
+    filters.limit = limit;
+
+    $.ajax({
+        url: "{% url 'getAllProduct' %}",
+        type: "GET",
+        data: filters,
+        success: function (response) {
+
+            let html = "";
+            let total = response.total;
+            let totalPages = Math.ceil(response.total / limit);
+            currentPage = page;
+
+            response.data.forEach(prod => {
+                html += `
+                <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item">
+                    <div class="block2">
+                        <div class="block2-pic hov-img0">
+                            <img src="${prod.image}">
+                            <a href="/product-detail?productID=${prod.productId}"
+                               class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1">
+                                Quick View
+                            </a>
+                        </div>
+
+                        <div class="block2-txt flex-w flex-t p-t-14">
+                            <div class="block2-txt-child1 flex-col-l">
+                                <a class="stext-104 cl4 hov-cl1">
+                                    ${prod.productName}
+                                </a>
+                                <span class="stext-105 cl3">
+                                    ₹${prod.price}
+                                </span>
+                            </div>
+
+                            <!-- Wishlist -->
+                            <div class="block2-txt-child2 flex-r p-t-3">
+                                <a href="#"
+                                     class="wishlist-icon js-wishlist"
+                                    data-product-id="${prod.productId}">
+                                    <i class="zmdi zmdi-favorite-outline"></i>
+
+                                </a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+            });
+
+            $("#productContainer").html(html);
+            loadUserWishlistIds();
+
+
+           
+
+            let paginationHTML = "";
+
+            if (totalPages > 1) {
+
+                // PREVIOUS BUTTON
+                if (page > 1) {
+                    paginationHTML += `
+                    <a href="javascript:void(0)"
+                    class="pagination-prev m-all-7"
+                    onclick="loadProducts(${page - 1})">
+                    &lt;
+                    </a>`;
+                }
+
+                // CURRENT PAGE
+                paginationHTML += `
+                <a href="javascript:void(0)"
+                class="flex-c-m how-pagination1 how-pagination1-active m-all-7">
+                ${page}
+                </a>`;
+
+                // NEXT PAGE NUMBER
+                if (page + 1 <= totalPages) {
+                    paginationHTML += `
+                    <a href="javascript:void(0)"
+                    class="flex-c-m how-pagination1 m-all-7"
+                    onclick="loadProducts(${page + 1})">
+                    ${page + 1}
+                    </a>`;
+                }
+
+                // DOTS + LAST PAGE
+                if (page + 1 < totalPages) {
+
+                    paginationHTML += `<span class="pagination-dots m-all-7">...</span>`;
+
+                    paginationHTML += `
+                    <a href="javascript:void(0)"
+                    class="flex-c-m how-pagination1 m-all-7"
+                    onclick="loadProducts(${totalPages})">
+                    ${totalPages}
+                    </a>`;
+                }
+            }
+
+            $("#paginationContainer").html(paginationHTML);      
+            let $grid = $('.isotope-grid');
+            if ($grid.data('isotope')) {
+                $grid.isotope('destroy');
+            }
+
+            $grid.imagesLoaded(function () {
+                $grid.isotope({
+                    itemSelector: '.isotope-item',
+                    layoutMode: 'fitRows'
+                });
+            });
+        }
+    });
+}
+
+$(document).on("click", ".filter-col2 a", function (e) {
+    e.preventDefault();
+
+    $(".filter-col2 a").removeClass("filter-link-active");
+    $(this).addClass("filter-link-active");
+
+    filters.startRange = $(this).data("start") || null;
+    filters.endRange = $(this).data("end") || null;
+
+    currentPage = 1;
+    loadProducts(1);
+});
+
+$(document).on("click", "#categoryFilter button", function () {
+    $("#categoryFilter button").removeClass("how-active1");
+    $(this).addClass("how-active1");
+
+    filters.categoryId = $(this).data("id") || null;
+    currentPage = 1;
+    loadProducts(1);
+});
+
+$(document).on("click", ".filter-col3 a", function (e) {
+    e.preventDefault();
+    filters.color = $(this).text().trim();
+    loadProducts(1);
+});
+
+
+$(document).on("click", ".filter-col1 a", function (e) {
+    e.preventDefault();
+
+    $(".filter-col1 a").removeClass("filter-link-active");
+    $(this).addClass("filter-link-active");
+
+    filters.sort = $(this).data("sort");
+    currentPage = 1;
+
+    loadProducts(1);
+});
+
+$(document).on("click", ".js-show-filter", function () {
+
+    filters.startRange = null;
+    filters.endRange = null;
+    filters.sort = null;
+    filters.color = null;
+
+    filters.categoryId = $("#categoryFilter .how-active1").data("id") || getCategoryFromURL();
+
+    loadProducts(1);
+});
+
+
+
+
+$(document).ready(function () {
+    loadCategories();
+    loadProducts();
+    loadBanners();
+});
+
+
+$(document).on("click", 'a[href="#"]', function (e) {
+    e.preventDefault();
+});
+$(document).on("click", ".js-wishlist", function () {
+ 
+    const productId = $(this).data("product-id");
+    const el = this;
+ 
+    const isActive = $(el).hasClass("active");
+ 
+    toggleWishlist(productId, el);
+ 
+    if (isActive) {
+        showAlert("Product removed from wishlist ❌","danger");
+    } else {
+        showAlert("Product added to wishlist ❤️","success");
+    }
+ 
+});
+ 
+let wishlistProductIds = [];
+
+function loadUserWishlistIds() {
+
+    const token = localStorage.getItem("token");
+    if (!token) return;
+
+    $.ajax({
+        url: "/getWishlistByUserId",
+        type: "GET",
+        headers: {
+            "token": token
+        },
+        success: function (res) {
+            const ids = res.data.map(i => i.productId);
+
+            $(".js-wishlist").each(function () {
+                const pid = $(this).data("product-id");
+               if (ids.includes(pid)) {
+                    $(this).addClass("active")
+                           .find("i")
+                           .removeClass("zmdi-favorite-outline")
+                           .addClass("zmdi-favorite");
+                }
+            });
+        }
+    });
+}
+
+function loadBanners(){
+
+    $.ajax({
+        url: "/getAllBanners",
+        type: "GET",
+        success: function(res){
+
+            let html = "";
+
+            res.data.forEach(function(banner){
+                html += `
+                <div class="item-slick1 bg-overlay1"
+                     style="background-image:url('${banner.image}')"
+                     data-thumb="${banner.image}">
+
+                    <div class="container h-full">
+                        <div class="flex-col-c-m h-full p-t-100 p-b-60 respon5">
+
+                            <span class="ltext-202 txt-center cl0">
+                                Women Collection
+                            </span>
+
+                            <h2 class="ltext-104 txt-center cl0 p-t-22 p-b-40">
+                                New Arrivals
+                            </h2>
+
+                            <a href="/Product"
+                               class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn2 p-lr-15">
+                               Shop Now
+                            </a>
+
+                        </div>
+                    </div>
+
+                </div>`;
+            });
+
+            $("#bannerContainer").html(html);
+
+            if ($('.slick1').hasClass('slick-initialized')) {
+                $('.slick1').slick('unslick');
+            }
+
+            $('.slick1').slick({
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 4000,
+                arrows: false,
+                dots: true,
+                appendDots: $('.wrap-slick1-dots'),
+                customPaging: function(slider, i) {
+                    var thumb = $(slider.$slides[i]).data('thumb');
+                    return '<img src="'+thumb+'"/>';
+                }
+            });
+
+        }
+    });
+
+}
+
+ 
+function showAlert(message, type="success") {
+ 
+    const alertHTML = `
+    <div class="alert alert-${type} alert-dismissible fade show shadow" role="alert">
+        ${message}
+        <button type="button" class="close" data-dismiss="alert">
+            <span>&times;</span>
+        </button>
+    </div>
+    `;
+ 
+    $("#alert-container").append(alertHTML);
+ 
+    setTimeout(function(){
+        $("#alert-container .alert").first().alert('close');
+    },3000);
+}
+ 
+</script>
+
+
+
+{% endblock content %}
+
+
+

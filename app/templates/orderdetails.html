@@ -1,0 +1,644 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+ 
+<link rel="stylesheet" href="{% static 'css/orderdetails.css' %}">
+ 
+<h2 class="order-title">Order Details</h2>
+ 
+<div class="order-detail-container">
+ 
+<div class="order-header">
+Serial No: <span id="orderSerial"></span>
+</div>
+ 
+<div id="orderItemsContainer"></div>
+ 
+ 
+<div class="order-status-box">
+ 
+<div class="order-head">
+ 
+<div class="icon">📦</div>
+ 
+<div>
+<h3>Order Placed</h3>
+<p id="deliveryDate"></p>
+</div>
+ 
+</div>
+ 
+<div class="timeline">
+ 
+<div class="step" id="step1">
+<div class="circle"></div>
+<p>Ordered</p>
+<span id="date1"></span>
+</div>
+ 
+<div class="line"></div>
+ 
+<div class="step" id="step2">
+<div class="circle"></div>
+<p>Shipped</p>
+<span id="date2"></span>
+</div>
+ 
+<div class="line"></div>
+ 
+<div class="step" id="step3">
+<div class="circle"></div>
+<p>Out for Delivery</p>
+<span id="date3"></span>
+</div>
+ 
+<div class="line"></div>
+ 
+<div class="step" id="step4">
+<div class="circle"></div>
+<p>Delivered</p>
+<span id="date4"></span>
+</div>
+ 
+</div>
+ 
+</div>
+ 
+ 
+<div class="delivery-address-box">
+ 
+<div class="address-header">
+<h3>Delivery Address</h3>
+ 
+<span id="changeAddressBtn" class="change-address-btn" onclick="openAddressList()">
+Change Address
+</span>
+ 
+</div>
+ 
+<div id="currentAddress">
+<!-- Address will load dynamically -->
+</div>
+ 
+</div>
+ 
+<div id="addressPopup" class="address-modal">
+ 
+<div class="address-modal-content">
+ 
+<div class="address-modal-header">
+<h3>Select Delivery Address</h3>
+<span class="close-modal" onclick="closeAddressPopup()">✕</span>
+</div>
+ 
+<form id="addressForm">
+ 
+<div id="addressList"></div>
+ 
+<button type="button" class="update-btn" onclick="updateAddress()">
+Update Address
+</button>
+ 
+</form>
+ 
+</div>
+ 
+</div>
+ 
+ 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+ 
+<script>
+ 
+
+let currentOrderAddressId = "";
+$(document).ready(function(){
+ 
+const params = new URLSearchParams(window.location.search);
+const serialNo = params.get("serialNo");
+ 
+$.ajax({
+ 
+url:"/getOrderHistoryById/?serialNo="+serialNo,
+type:"GET",
+ 
+headers:{
+token:localStorage.getItem("token")
+},
+ 
+success:function(res){
+ 
+const order=res.data;
+ 
+$("#orderSerial").text(order.serialNo);
+ 
+let html="";
+ 
+order.items.forEach(item=>{
+html += `
+ 
+<div class="order-product">
+ 
+    <div class="product-left" onclick="goToProduct(${item.productID})" style="cursor:pointer;">
+ 
+    <img src="${item.image}" class="product-img">
+ 
+    <div class="product-middle">
+ 
+            <p class="product-name">${item.productName}</p>
+ 
+            <div class="meta">
+            Size: ${item.size} • Qty: ${item.quantity}
+            </div>
+ 
+            <div class="price">
+            ₹${item.price}
+            </div>
+ 
+        </div>
+ 
+    </div>
+ 
+${order.status === "Delivered" ? `
+ 
+<div class="product-review"
+data-product="${item.productID}"
+data-order="${order.orderID}">
+ 
+<p class="rating-title">Rate this product</p>
+ 
+<div class="stars"
+data-product="${item.productID}"
+data-order="${order.orderID}">
+ 
+<span class="star" data-rate="1">☆</span>
+<span class="star" data-rate="2">☆</span>
+<span class="star" data-rate="3">☆</span>
+<span class="star" data-rate="4">☆</span>
+<span class="star" data-rate="5">☆</span>
+ 
+</div>
+ 
+<div class="review-box" style="display:none">
+ 
+<textarea class="review-comment"
+placeholder="Write your review"></textarea>
+ 
+<input type="file" class="review-image">
+ 
+<button class="submit-review">Submit Review</button>
+ 
+</div>
+ 
+</div>
+ 
+` : `
+ 
+<div class="product-review">
+ 
+ 
+</div>
+ 
+`}
+</div>
+`;
+});
+ 
+$("#orderItemsContainer").html(html);
+ 
+ 
+/* LOAD EXISTING REVIEWS */
+ 
+order.items.forEach(item=>{
+loadReview(order.orderID,item.productID);
+});
+ 
+ 
+/* DELIVERY DATE */
+let deliveryText="";
+ 
+if(order.status === "Delivered" && order.deliveredDate){
+ 
+let deliveredDate=new Date(order.deliveredDate);
+ 
+deliveryText = deliveredDate.toLocaleDateString("en-GB",{
+day:'2-digit',
+month:'short'
+});
+ 
+$("#deliveryDate").text("Delivered on " + deliveryText);
+ 
+}else{
+ 
+let orderDate=new Date(order.orderedDate);
+ 
+let delivery=new Date(orderDate);
+delivery.setDate(delivery.getDate()+5);
+ 
+deliveryText = delivery.toLocaleDateString("en-GB",{
+day:'2-digit',
+month:'short'
+});
+ 
+$("#deliveryDate").text("Delivered by " + deliveryText);
+ 
+}
+ 
+ 
+/* ADDRESS */
+ 
+/* ADDRESS */
+ 
+let addr = order.address;
+ 
+currentOrderAddressId = addr.addressId;   // ✅ ADD THIS
+ 
+let addressHTML = `
+<p><b>${addr.name}</b></p>
+<p>${addr.street}, ${addr.landmark}</p>
+<p>${addr.pincode}</p>
+<p>${addr.phone}</p>
+`;
+ 
+$("#currentAddress").html(addressHTML);
+ 
+ 
+/* STATUS */
+ 
+const status=order.status;
+if(status === "Delivered"){
+   
+    $("#changeAddressBtn").text("Cannot change address");
+    $("#changeAddressBtn").css({
+        "pointer-events": "none",
+        "opacity": "0.6",
+        "cursor": "not-allowed"
+    });
+ 
+}
+ 
+if(status==="Ordered"){
+$("#step1").addClass("active");
+}
+ 
+if(status==="Shipped"){
+$("#step1,#step2").addClass("active");
+}
+ 
+if(status==="Out for Delivery"){
+$("#step1,#step2,#step3").addClass("active");
+}
+ 
+if(status==="Delivered"){
+$("#step1,#step2,#step3,#step4").addClass("active");
+}
+ 
+ 
+/* TRACKING DATES */
+ 
+$("#date1").text(order.orderedDate||"");
+$("#date2").text(order.shippedDate||"");
+$("#date3").text(order.outForDeliveryDate||"");
+$("#date4").text(order.deliveredDate||"");
+ 
+}
+ 
+});
+ 
+});
+ 
+ 
+ 
+/* STAR CLICK */
+ 
+$(document).on("click",".star",function(){
+ 
+let parent = $(this).closest(".stars");
+ 
+/* prevent editing if already reviewed */
+ 
+if(parent.attr("data-reviewed")=="true"){
+return;
+}
+ 
+let rating = $(this).data("rate");
+ 
+/* save rating */
+ 
+parent.attr("data-selected-rating",rating);
+ 
+/* update stars */
+ 
+let stars = parent.find(".star");
+ 
+stars.each(function(){
+ 
+if($(this).data("rate") <= rating){
+ 
+$(this).addClass("filled").text("★");
+ 
+}else{
+ 
+$(this).removeClass("filled").text("☆");
+ 
+}
+ 
+});
+ 
+/* show review box */
+ 
+$(this).closest(".product-review")
+.find(".review-box")
+.slideDown();
+ 
+});
+ 
+ 
+ 
+$(document).on("click",".submit-review",function(){
+ 
+let box = $(this).closest(".product-review");
+ 
+let productID = box.find(".stars").data("product");
+let orderID = box.find(".stars").data("order");
+ 
+let rating = box.find(".stars").attr("data-selected-rating");
+let comment = box.find(".review-comment").val();
+let image = box.find(".review-image")[0].files[0];
+ 
+if(!productID){
+alert("productID missing");
+return;
+}
+ 
+if(!rating){
+alert("Please select rating");
+return;
+}
+ 
+/* ✅ USE FORMDATA (because image included) */
+let formData = new FormData();
+ 
+formData.append("productID", productID);
+formData.append("orderID", orderID);
+formData.append("Rating", rating);
+formData.append("Comment", comment);
+ 
+if(image){
+formData.append("Image", image);
+}
+ 
+$.ajax({
+ 
+url:"/CreateReviewWithImage",   // ✅ NEW API
+type:"POST",
+ 
+headers:{
+token:localStorage.getItem("token"),
+'X-CSRFToken': getCookie('csrftoken')
+},
+ 
+data:formData,
+processData:false,
+contentType:false,
+ 
+success:function(res){
+ 
+alert("Review Submitted!");
+ 
+// Optional: lock stars after submit
+let starsContainer = box.find(".stars");
+starsContainer.attr("data-reviewed","true");
+ 
+box.find(".review-box").slideUp();
+ 
+}
+ 
+});
+ 
+});
+ 
+ 
+ 
+/* LOAD REVIEW */
+function loadReview(orderID,productID){
+   
+ 
+$.ajax({
+ 
+url:"/GetReview",
+type:"GET",
+ 
+headers:{
+token:localStorage.getItem("token")
+},
+ 
+data:{
+orderID:orderID,
+productID:productID
+},
+ 
+success:function(res){
+ 
+if(res.rating){
+ 
+let starsContainer = $(`.product-review[data-product="${productID}"] .stars`);
+let stars = starsContainer.find(".star");
+ 
+/* Fill stars */
+ 
+stars.each(function(){
+ 
+if($(this).data("rate") <= res.rating){
+ 
+$(this).addClass("filled").text("★");
+ 
+}else{
+ 
+$(this).removeClass("filled").text("☆");
+ 
+}
+ 
+});
+ 
+/* prevent editing */
+ 
+starsContainer.attr("data-reviewed","true");
+ 
+/* hide review form */
+ 
+let reviewBox = starsContainer.closest(".product-review").find(".review-box");
+reviewBox.hide();
+ 
+}
+ 
+}
+ 
+});
+ 
+}
+function getCookie(name){
+ 
+let cookieValue = null;
+ 
+if(document.cookie && document.cookie !== ''){
+ 
+let cookies = document.cookie.split(';');
+ 
+for(let i=0;i<cookies.length;i++){
+ 
+let cookie = cookies[i].trim();
+ 
+if(cookie.substring(0,name.length+1) === (name + '=')){
+ 
+cookieValue = decodeURIComponent(cookie.substring(name.length+1));
+break;
+ 
+}
+ 
+}
+ 
+}
+ 
+return cookieValue;
+ 
+}
+ 
+function selectAddress(addressID){
+ 
+let selectedAddress = "";
+ 
+$("#addressList .address-card").each(function(){
+ 
+if($(this).find("button").attr("onclick").includes(addressID)){
+ 
+selectedAddress = $(this).html();
+ 
+}
+ 
+});
+ 
+$("#currentAddress").html(selectedAddress);
+ 
+$("#addressPopup").hide();
+ 
+}
+function openAddressList(){
+ 
+$.ajax({
+ 
+url:"/getAllAddressesOfUser",
+type:"GET",
+ 
+headers:{
+token: localStorage.getItem("token")
+},
+ 
+success:function(res){
+ 
+let html="";
+ 
+res.data.forEach(addr=>{
+ 
+let checked = (addr.addressId == currentOrderAddressId) ? "checked" : "";
+ 
+html+=`
+ 
+<label class="address-card">
+ 
+<div class="address-top">
+ 
+<input type="radio" name="address" value="${addr.addressId}" ${checked}>
+ 
+<span class="address-name">${addr.fullName}</span>
+ 
+</div>
+ 
+<p>${addr.streetAddress}, ${addr.landmark}</p>
+ 
+<p>${addr.pincode}</p>
+ 
+<p>${addr.phoneNumber}</p>
+ 
+</label>
+ 
+`;
+ 
+});
+ 
+$("#addressList").html(html);
+$("#addressPopup").css("display","flex");
+ 
+}
+ 
+});
+ 
+}
+function closeAddressPopup(){
+$("#addressPopup").hide();
+}
+function updateAddress(){
+
+let selected = $("input[name='address']:checked");
+ 
+if(selected.length === 0){
+alert("Please select address");
+return;
+}
+ 
+const params = new URLSearchParams(window.location.search);
+const serialNo = params.get("serialNo");
+ 
+let addressID = selected.val();
+ 
+/* GET SELECTED DATA FROM POPUP */
+let name = selected.closest(".address-card").find(".address-name").text();
+ 
+let details = selected.closest(".address-card").find("p").map(function(){
+return $(this).text();
+}).get();
+ 
+$.ajax({
+ 
+url:"/updateOrderAddress",
+type:"POST",
+ 
+headers:{
+token:localStorage.getItem("token"),
+'X-CSRFToken': getCookie('csrftoken')
+},
+ 
+data:{
+serialNo:serialNo,
+addressId:addressID
+},
+ 
+success:function(){
+currentOrderAddressId = addressID;   // ⭐ ADD THIS
+ 
+/* ✅ CLOSE POPUP */
+closeAddressPopup();
+ 
+/* ✅ UPDATE UI INSTANTLY */
+$("#currentAddress").html(`
+<p><b>${name}</b></p>
+<p>${details[0]}</p>
+<p>${details[1]}</p>
+<p>${details[2]}</p>
+`);
+ 
+/* ❌ NO reload */
+/* ❌ NO alert */
+ 
+}
+ 
+});
+ 
+}
+function goToProduct(productID){
+    window.location.href = `/product-detail/?productID=${productID}`;
+}
+</script>
+ 
+{% endblock %}
+ 
